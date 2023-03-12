@@ -4,7 +4,8 @@
 
 package karan;
 
-import karan.util.HibernateUtil;
+//import karan.util.HibernateUtil;
+import karan.util.PocetniInsert;
 
 /**
  *
@@ -13,6 +14,7 @@ import karan.util.HibernateUtil;
 public class Start {
 
     public static void main(String[] args) {
-        HibernateUtil.getsesSession();
+       // HibernateUtil.getsesSession();
+       new PocetniInsert();
     }
 }
