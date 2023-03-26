@@ -11,7 +11,7 @@ public class Pas extends Entitet {
     private boolean mjesavina;
     private String ime;
     private String pol;
-    private int dob;
+    private String dob;
     private BigDecimal kilaza;
     @ManyToMany
     private List<Transakcija> transakcije;
@@ -21,7 +21,7 @@ public class Pas extends Entitet {
         transakcije = new ArrayList<>();
     }
 
-    public Pas(int sifra, boolean mjesavina, String ime, String pol, int dob, BigDecimal kilaza,
+    public Pas(int sifra, boolean mjesavina, String ime, String pol, String dob, BigDecimal kilaza,
             List<Transakcija> transakcije) {
         super(sifra);
         this.mjesavina = mjesavina;
@@ -56,11 +56,11 @@ public class Pas extends Entitet {
         this.pol = pol;
     }
 
-    public int getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(int dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

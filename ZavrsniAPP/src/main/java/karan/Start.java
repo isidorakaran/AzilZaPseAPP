@@ -6,8 +6,12 @@ package karan;
 
 //import karan.util.HibernateUtil;
 import karan.controller.ObradaOsoba;
+import karan.controller.ObradaPas;
+import karan.controller.ObradaTransakcija;
 import karan.controller.ObradaVrstaTransakcije;
 import karan.model.Osoba;
+import karan.model.Pas;
+import karan.model.Transakcija;
 import karan.model.VrstaTransakcije;
 import karan.util.EdunovaException;
 import karan.util.PocetniInsert;
@@ -20,12 +24,12 @@ public class Start {
 
     public static void main(String[] args) {
        // HibernateUtil.getsesSession();
-       new PocetniInsert();
+      new PocetniInsert();
        
-      /*ObradaOsoba oo=new ObradaOsoba();
+     /* ObradaOsoba oo=new ObradaOsoba();
         
         Osoba osoba=new Osoba();
-        osoba.setBrojTelefona("1972345432");
+        osoba.setIme("Isi");
         oo.setEntitet(osoba);
         
         try {
@@ -36,26 +40,49 @@ public class Start {
         
         for(Osoba o:oo.read()){
             System.out.println(o.getBrojTelefona());
-        }
-        */
-      
-     /*
-      
-        ObradaVrstaTransakcije ovt=new ObradaVrstaTransakcije();
-        for(VrstaTransakcije vt: ovt.read()){
-            System.out.println(vt.getNaziv());
-        }
-         
+        }*/
+        
+    /*ObradaVrstaTransakcije ovt=new ObradaVrstaTransakcije();   
       VrstaTransakcije vrstat=new VrstaTransakcije();
-      vrstat.setNaziv("drugi preko kontrolera");
+      vrstat.setNaziv("A");
       ovt.setEntitet(vrstat);
         try {
             ovt.create();
         } catch (EdunovaException e) {
             System.out.println(e.getPoruka());
         }
-        */
        
+        for(VrstaTransakcije vt: ovt.read()){
+            System.out.println(vt.getNaziv());
        
+    }*/
+   
+      /*  ObradaTransakcija ot=new ObradaTransakcija();
+        
+        
+        Transakcija transakcija=new Transakcija();
+        transakcija.setNapomena(null);
+        ot.setEntitet(transakcija);
+        try {
+            ot.create();
+        } catch (EdunovaException e) {
+            System.out.println(e.getPoruka());
+        }
+        for(Transakcija t:ot.read()){
+            System.out.println(t.getNapomena());
+        }*/
+        /*ObradaPas op=new ObradaPas();
+        Pas pas=new Pas();
+        pas.setIme(null);
+        op.setEntitet(pas);
+        try {
+            op.create();
+        } catch (EdunovaException e) {
+            System.out.println(e.getPoruka());
+        }
+        for(Pas p:op.read()){
+            System.out.println(p.getIme());
+        }*/
+   
     }
 }

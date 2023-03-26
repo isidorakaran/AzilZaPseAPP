@@ -4,6 +4,9 @@
  */
 package karan.util;
 
+import com.github.javafaker.Faker;
+import java.math.BigDecimal;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +15,7 @@ import java.util.regex.Pattern;
  * @author WinUSER
  */
 public class Alati {
+  
     
     public static boolean isValid(String email)
     {
@@ -37,5 +41,6 @@ public class Alati {
  
         return (m.matches());
     } 
-    
+
+
 }
