@@ -5,6 +5,7 @@
 package karan;
 
 //import karan.util.HibernateUtil;
+import java.math.BigDecimal;
 import karan.controller.ObradaOsoba;
 import karan.controller.ObradaPas;
 import karan.controller.ObradaTransakcija;
@@ -15,6 +16,7 @@ import karan.model.Transakcija;
 import karan.model.VrstaTransakcije;
 import karan.util.EdunovaException;
 import karan.util.PocetniInsert;
+import karan.view.SplashScreen;
 
 /**
  *
@@ -24,7 +26,10 @@ public class Start {
 
     public static void main(String[] args) {
        // HibernateUtil.getsesSession();
-      new PocetniInsert();
+   //new PocetniInsert();
+   new SplashScreen().setVisible(true);
+  
+   
        
      /* ObradaOsoba oo=new ObradaOsoba();
         
@@ -73,7 +78,7 @@ public class Start {
         }*/
         /*ObradaPas op=new ObradaPas();
         Pas pas=new Pas();
-        pas.setIme(null);
+        pas.setPol("Male");
         op.setEntitet(pas);
         try {
             op.create();
@@ -81,7 +86,7 @@ public class Start {
             System.out.println(e.getPoruka());
         }
         for(Pas p:op.read()){
-            System.out.println(p.getIme());
+            System.out.println(p.getPol());
         }*/
    
     }

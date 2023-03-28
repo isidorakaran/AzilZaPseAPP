@@ -43,7 +43,7 @@ public class PocetniInsert {
         psi = new ArrayList<>();
         transakcije = new ArrayList<>();
         vrsteTransakcije = new ArrayList<>();
-        session = HibernateUtil.getsesSession();
+        session = HibernateUtil.getSession();
         session.beginTransaction();
         kreirajOsobe();
         kreirajVrsteTransakcije();
@@ -100,7 +100,7 @@ public class PocetniInsert {
             p.setIme(faker.dog().name());
             p.setDob(faker.number().numberBetween(1, 11)+" "+faker.demographic().sex().replaceAll("Male", "Month").replaceAll("Female", "Year"));
             p.setKilaza(new BigDecimal(faker.number().numberBetween(0, 30)));
-            p.setMjesavina(faker.book().genre().contains("ye"));
+            p.setMjesavina(faker.bool().bool());
             p.setPol(faker.dog().gender());
             t = new ArrayList<>();
             for (int j = 0; j < sb(1, 2); j++) {
@@ -111,9 +111,7 @@ public class PocetniInsert {
 
         }
     }
-public double sbd(int min, int max) {
-        return ThreadLocalRandom.current().nextDouble(min, max + 1);
-    }
+
     private int sb(int min, int max) {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }

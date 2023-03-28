@@ -4,7 +4,9 @@
  */
 package karan.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.regex.Pattern;
 import karan.model.Pas;
 import karan.util.EdunovaException;
 
@@ -12,7 +14,7 @@ import karan.util.EdunovaException;
  *
  * @author WinUSER
  */
-public class ObradaPas extends Obrada<Pas>{
+public class ObradaPas extends Obrada<Pas> {
 
     @Override
     public List<Pas> read() {
@@ -21,9 +23,11 @@ public class ObradaPas extends Obrada<Pas>{
 
     @Override
     protected void kontrolaUnos() throws EdunovaException {
-        kontrolaMjesavina();
-        kontrolaIme();
-        kontrolaDob();
+        //kontrolaMjesavina();
+        kontrolaPol();
+        //kontrolaIme();
+        //kontrolaDob();
+        //kontrolaKilaza();
     }
 
     @Override
@@ -35,15 +39,15 @@ public class ObradaPas extends Obrada<Pas>{
     protected void kontrolaBrisanje() throws EdunovaException {
     }
 
-    private void kontrolaIme() throws EdunovaException{
+    private void kontrolaIme() throws EdunovaException {
         kontrolaImeNull();
         kontrolaImeNijeBroj();
         kontrolaImeNijeZnak();
         kontrolaImeMinIMaxDuzina();
     }
 
-    private void kontrolaImeNijeBroj() throws EdunovaException{
-          boolean broj = false;
+    private void kontrolaImeNijeBroj() throws EdunovaException {
+        boolean broj = false;
         try {
             Double.parseDouble(entitet.getIme());
             broj = true;
@@ -54,8 +58,8 @@ public class ObradaPas extends Obrada<Pas>{
         }
     }
 
-    private void kontrolaImeNijeZnak() throws EdunovaException{
-         for (int i = 0; i < entitet.getIme().length(); i++) {
+    private void kontrolaImeNijeZnak() throws EdunovaException {
+        for (int i = 0; i < entitet.getIme().length(); i++) {
             if (Character.isLetter(entitet.getIme().charAt(i))) {
                 continue;
             } else {
@@ -64,24 +68,68 @@ public class ObradaPas extends Obrada<Pas>{
         }
     }
 
-    private void kontrolaImeNull() throws EdunovaException{
+    private void kontrolaImeNull() throws EdunovaException {
         if (entitet.getIme() == null) {
             throw new EdunovaException("Ime mora biti postavljeno");
         }
     }
 
-    private void kontrolaImeMinIMaxDuzina() throws EdunovaException{
-          if (entitet.getIme().trim().length() < 2 || entitet.getIme().trim().length() > 30) {
+    private void kontrolaImeMinIMaxDuzina() throws EdunovaException {
+        if (entitet.getIme().trim().length() < 2 || entitet.getIme().trim().length() > 30) {
             throw new EdunovaException("Ime osobe ne smije imati manje od 2 i više od 30 znakova");
         }
     }
 
-    private void kontrolaMjesavina() throws EdunovaException{
-        
+    private void kontrolaMjesavina() throws EdunovaException {
+
     }
 
-    private void kontrolaDob() throws EdunovaException{
-        
+    private void kontrolaDob() throws EdunovaException {
+        kontrolaDobNull();
+        kontrolaDobNijeZnak();
     }
-    
+
+    private void kontrolaKilaza() throws EdunovaException {
+        if (entitet.getKilaza() == null || entitet.getKilaza().compareTo(BigDecimal.ZERO) <= 0
+                || entitet.getKilaza().compareTo(new BigDecimal(100)) == 1) {
+            throw new EdunovaException("Kilaza psa mora biti postavljena" + " ,veća od 0 i manja od 100");
+        }
+    }
+
+    private void kontrolaDobNijeZnak() throws EdunovaException {
+        if (!(Pattern.matches("^[\\p{L} 0-9.'-]+$", entitet.getDob()))) {
+            throw new EdunovaException("DOb ne smije biti znak");
+        }
+
+    }
+
+    private void kontrolaPol() throws EdunovaException{
+        kontrolaPolNull();
+        kontrolaPolBoolean();
+    }
+
+    private void kontrolaDobNull() throws EdunovaException{
+ if (entitet.getIme() == null) {
+            throw new EdunovaException("Dob psa mora biti postavljen");
+        }
+    }
+
+    private void kontrolaPolNull() throws EdunovaException{
+         if (entitet.getIme() == null) {
+            throw new EdunovaException("Pol psa mora biti postavljen");
+        }
+    }
+
+ 
+
+    private boolean kontrolaPolBoolean() throws EdunovaException{
+               
+        if (entitet.getPol().equals("Male") || entitet.getPol().equals("Female")){
+           return true;
+        }else{
+            throw new EdunovaException("Pol mora biti male ili female");
+        }
+        
+
+    }
 }

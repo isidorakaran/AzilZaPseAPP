@@ -26,7 +26,7 @@ public abstract class Obrada<T extends Entitet>  {
       protected abstract void kontrolaBrisanje() throws EdunovaException;
 
     public Obrada() {
-        this.session=HibernateUtil.getsesSession();
+        this.session=HibernateUtil.getSession();
     }
     
     public void create() throws EdunovaException{

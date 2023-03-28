@@ -17,7 +17,7 @@ public class HibernateUtil {
         
     }
     
-    public static Session getsesSession(){
+    public static Session getSession(){
         if(session==null){
             session= new Configuration().configure().buildSessionFactory().openSession();
         }
