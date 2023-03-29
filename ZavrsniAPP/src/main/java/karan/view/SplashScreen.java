@@ -4,9 +4,13 @@
  */
 package karan.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.Logger; 
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import karan.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -103,10 +107,12 @@ public class SplashScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblUcitavanje;
     // End of variables declaration//GEN-END:variables
 
-    private void ucitaj() {
+    private void ucitaj()  {
         
         new Ucitavanje().start();
-        
+        new UcitavanjeGif().start();
+        new UcitanjeProzorLogin().start();
+      
     }
     
    
@@ -131,34 +137,94 @@ public class SplashScreen extends javax.swing.JFrame {
         }catch(javax.swing.UnsupportedLookAndFeelException ex){
             java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
         }
-      
-        SplashScreen sp=new SplashScreen();
-       sp.setVisible(true);
+    HibernateUtil.getSession();
     
         try {
             for(int i=0;i<=100;i++){
-                Thread.sleep(80);
-                  sp.lblPostotakUcitavanja.setText(i + "%");
+                Thread.sleep(60);
+                  lblPostotakUcitavanja.setText(i + "%");
                   if(i==10){
-                      sp.lblUcitavanje.setText("Učitavanje.");
+                      lblUcitavanje.setText("Učitavanje.");
                   }
                   if(i==20){
-                      sp.lblUcitavanje.setText("Učitavanje..");
+                      lblUcitavanje.setText("Učitavanje..");
+                  }
+                  if(i==30){
+                      lblUcitavanje.setText("Učitavanje...");
+                  }
+                  if(i==40){
+                      lblUcitavanje.setText("Uspješno učitavanje!");
                   }
                   if(i==50){
-                      sp.lblUcitavanje.setText("Učitavanje...");
+                      lblUcitavanje.setText("Pokretanje aplikacije!");
                   }
-                  if(i==60){
-                      sp.lblUcitavanje.setText("Uspješno učitavanje!");
-                  }
-                  if(i==70){
-                      sp.lblUcitavanje.setText("Pokretanje aplikacije!");
-                  }
-                  sp.barUcitavanjeBar.setValue(i);
+                  
+                  barUcitavanjeBar.setValue(i);
+                 
             }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+        
     }
+        
     }
+    
+     private class UcitavanjeGif extends Thread{
+        public void run(){
+         try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                    
+                }
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
+        }catch(InstantiationException ex){
+            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
+        }catch(IllegalAccessException ex){
+            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
+        }catch(javax.swing.UnsupportedLookAndFeelException ex){
+            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
+        }
+    HibernateUtil.getSession();
+    PozadinaGif.setVisible(true);
+            try {
+                Thread.sleep(60);
+            } catch (InterruptedException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+    
+}
+     }
+private class UcitanjeProzorLogin extends Thread{
+
+        @Override
+        public void run() {
+            Session s=HibernateUtil.getSession();
+            
+          if(!s.getMetamodel().getEntities().isEmpty()){
+               try {
+            Thread.sleep(7000);
+        } catch (InterruptedException ex) {
+        }
+                new ProzorLogin().setVisible(true);
+                
+                dispose();
+            }else{
+              JOptionPane.showMessageDialog(getRootPane(), "Problem sa bazom podataka.");
+          }
+      
+            
+            
+            
+        }
+    
+}
+
 }
