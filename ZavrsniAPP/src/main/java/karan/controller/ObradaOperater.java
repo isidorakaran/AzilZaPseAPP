@@ -5,6 +5,8 @@
 package karan.controller;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import karan.model.Operater;
 import karan.util.EdunovaException;
 import org.mindrot.jbcrypt.BCrypt;
@@ -17,36 +19,37 @@ public class ObradaOperater extends Obrada<Operater>{
 
     @Override
     public List<Operater> read() {
-        return session.createQuery("from Operater",Operater.class).list();
+        return session.createQuery("from Operater ",Operater.class).list();
     }
     
     
 
     @Override
     protected void kontrolaUnos() throws EdunovaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     protected void kontrolaPromjena() throws EdunovaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void unosAdminOperater()throws EdunovaException{
+    public void unosAdminOperater(){
         Operater o=new Operater();
         o.setIme("Admin");
         o.setPrezime("Operater");
         o.setEmail("karanisidora@gmail.com");
         o.setOib("09403302317");
-        o.setLozinka(BCrypt.hashpw("karan", BCrypt.gensalt()).toCharArray());
+        o.setLozinka(BCrypt.hashpw("karanisidora", BCrypt.gensalt()).toCharArray());
         
         entitet=o;
-        create();
+        try {
+            create();
+        } catch (EdunovaException ex) {
+            System.out.println(ex.getPoruka());
+        }
         
     }
     

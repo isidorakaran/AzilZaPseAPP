@@ -20,5 +20,6 @@
     <mapping class="karan.model.Pas" />
     <mapping class="karan.model.Transakcija" />
     <mapping class="karan.model.VrstaTransakcije" />
+    <mapping class="karan.model.Operater" />
   </session-factory>
 </hibernate-configuration>

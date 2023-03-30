@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger; 
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import karan.controller.Obrada;
+import karan.controller.ObradaOperater;
 import karan.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -153,10 +155,19 @@ public class SplashScreen extends javax.swing.JFrame {
                       lblUcitavanje.setText("Učitavanje...");
                   }
                   if(i==40){
-                      lblUcitavanje.setText("Uspješno učitavanje!");
+                      lblUcitavanje.setText("Učitavanje.");
                   }
                   if(i==50){
+                      lblUcitavanje.setText("Učitavanje..");
+                  }
+                   if(i==60){
+                      lblUcitavanje.setText("Učitavanje...");
+                  }
+                    if(i==70){
                       lblUcitavanje.setText("Pokretanje aplikacije!");
+                  }
+                     if(i==90){
+                      lblUcitavanje.setText("Uspješno pokretanje aplikacije!");
                   }
                   
                   barUcitavanjeBar.setValue(i);
@@ -209,8 +220,12 @@ private class UcitanjeProzorLogin extends Thread{
             Session s=HibernateUtil.getSession();
             
           if(!s.getMetamodel().getEntities().isEmpty()){
+              ObradaOperater op=new ObradaOperater();
+              if(op.read().isEmpty()){
+                  op.unosAdminOperater();
+              }
                try {
-            Thread.sleep(7000);
+            Thread.sleep(7330);
         } catch (InterruptedException ex) {
         }
                 new ProzorLogin().setVisible(true);

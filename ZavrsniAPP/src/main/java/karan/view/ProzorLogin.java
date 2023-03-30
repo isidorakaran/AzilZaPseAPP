@@ -29,50 +29,121 @@ public class ProzorLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        lblCrta1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        pswLozinka = new javax.swing.JPasswordField();
+        lblCrta2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnAutoriziraj = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(760, 600));
 
-        jPanel1.setBackground(new java.awt.Color(251, 225, 183));
+        jPanel2.setBackground(new java.awt.Color(89, 138, 224));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SlikaAnimacije.png"))); // NOI18N
+        lblEmail.setBackground(new java.awt.Color(255, 255, 255));
+        lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(255, 255, 255));
+        lblEmail.setText("E-mail");
+        jPanel2.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 117, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel2)
-                .addContainerGap(324, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel2)
-                .addContainerGap(439, Short.MAX_VALUE))
-        );
+        txtEmail.setBackground(new java.awt.Color(89, 138, 224));
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtEmail.setForeground(new java.awt.Color(255, 255, 255));
+        txtEmail.setText("karanisidora@gmail.com");
+        txtEmail.setBorder(null);
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 250, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Login");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
+
+        lblCrta1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblCrta1.setForeground(new java.awt.Color(255, 255, 255));
+        lblCrta1.setText("________________________________");
+        lblCrta1.setAlignmentY(0.0F);
+        jPanel2.add(lblCrta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 310, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Lozinka");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
+
+        pswLozinka.setBackground(new java.awt.Color(89, 138, 224));
+        pswLozinka.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pswLozinka.setForeground(new java.awt.Color(255, 255, 255));
+        pswLozinka.setText("jPasswordField1");
+        pswLozinka.setBorder(null);
+        jPanel2.add(pswLozinka, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 240, -1));
+
+        lblCrta2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblCrta2.setForeground(new java.awt.Color(255, 255, 255));
+        lblCrta2.setText("________________________________");
+        lblCrta2.setAlignmentY(0.0F);
+        jPanel2.add(lblCrta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 310, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Forgot_Password_50px_4.png"))); // NOI18N
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, -1));
+
+        btnAutoriziraj.setBackground(new java.awt.Color(89, 138, 224));
+        btnAutoriziraj.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        btnAutoriziraj.setForeground(new java.awt.Color(255, 255, 255));
+        btnAutoriziraj.setText("AUTORIZIRAJ");
+        btnAutoriziraj.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 0));
+        jPanel2.add(btnAutoriziraj, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 190, 40));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Account_50px.png"))); // NOI18N
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\WinUSER\\Pictures\\White_paw_print.png")); // NOI18N
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Dobrodišli u aplikaciju Azil za pse,");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 400, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("molimo registrirajte se!");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,7 +151,20 @@ public class ProzorLogin extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAutoriziraj;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCrta1;
+    private javax.swing.JLabel lblCrta2;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JPasswordField pswLozinka;
+    private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
 }
