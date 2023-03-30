@@ -228,7 +228,7 @@ private class UcitanjeProzorLogin extends Thread{
             Thread.sleep(7330);
         } catch (InterruptedException ex) {
         }
-                new ProzorLogin().setVisible(true);
+               new ProzorLogin().setVisible(true);
                 
                 dispose();
             }else{

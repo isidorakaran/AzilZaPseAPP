@@ -4,6 +4,7 @@
  */
 package karan.controller;
 
+import jakarta.persistence.NoResultException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class ObradaOperater extends Obrada<Operater>{
         o.setPrezime("Operater");
         o.setEmail("karanisidora@gmail.com");
         o.setOib("09403302317");
-        o.setLozinka(BCrypt.hashpw("karanisidora", BCrypt.gensalt()).toCharArray());
+        o.setLozinka(BCrypt.hashpw("1111", BCrypt.gensalt()).toCharArray());
         
         entitet=o;
         try {
@@ -52,5 +53,22 @@ public class ObradaOperater extends Obrada<Operater>{
         }
         
     }
+    
+     public Operater autoriziraj(String email,char [] lozinka){
+         Operater o;
+        try {
+           o=session.createQuery("from Operater o where o.email=:email", Operater.class)
+                   .setParameter("email", email).getSingleResult();
+        } catch (NoResultException e) {
+        return null;
+        }
+        
+        if(BCrypt.checkpw(new String(lozinka),new String(o.getLozinka()))){
+            return o;
+        }
+        
+        return null;
+    }
+    
     
 }

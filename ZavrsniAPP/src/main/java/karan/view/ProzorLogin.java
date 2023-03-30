@@ -4,20 +4,53 @@
  */
 package karan.view;
 
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import karan.controller.ObradaOperater;
+import karan.model.Operater;
 import karan.util.Aplikacija;
+import org.hibernate.cfg.AvailableSettings;
 
 /**
  *
  * @author WinUSER
  */
 public class ProzorLogin extends javax.swing.JFrame {
+    
+    private ObradaOperater obrada;
 
     /**
      * Creates new form ProzorLogin
      */
     public ProzorLogin() {
         initComponents();
+        obrada=new ObradaOperater();
         setTitle(Aplikacija.NAZIV_APP + " Login");
+        setIcon();
+        
+    }
+    
+    private void autoriziraj(){
+        lblPoruka.setText("");
+        if(txtEmail.getText().isEmpty()){
+            lblPoruka.setText("Obavezno unijeti e-mail.");
+            return;
+        }
+        
+        if(pswLozinka.getPassword().length==0){
+         lblPoruka.setText("Obavezno unijeti lozinku.");
+         return;
+        }
+        
+        Operater o=obrada.autoriziraj(txtEmail.getText(), pswLozinka.getPassword());
+        if(o==null){
+            lblPoruka.setText("Neispravna kombinacija email i lozinka.");
+            return;
+        }
+        
+        new ProzorIzbornik().setVisible(true);
+        dispose();
+        
     }
 
     /**
@@ -44,11 +77,11 @@ public class ProzorLogin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        lblPoruka = new javax.swing.JLabel();
 
         jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(760, 600));
 
         jPanel2.setBackground(new java.awt.Color(89, 138, 224));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -67,6 +100,11 @@ public class ProzorLogin extends javax.swing.JFrame {
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
+            }
+        });
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmailKeyPressed(evt);
             }
         });
         jPanel2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 250, 30));
@@ -90,8 +128,13 @@ public class ProzorLogin extends javax.swing.JFrame {
         pswLozinka.setBackground(new java.awt.Color(89, 138, 224));
         pswLozinka.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         pswLozinka.setForeground(new java.awt.Color(255, 255, 255));
-        pswLozinka.setText("jPasswordField1");
+        pswLozinka.setText("1111");
         pswLozinka.setBorder(null);
+        pswLozinka.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pswLozinkaKeyPressed(evt);
+            }
+        });
         jPanel2.add(pswLozinka, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 240, -1));
 
         lblCrta2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -108,6 +151,11 @@ public class ProzorLogin extends javax.swing.JFrame {
         btnAutoriziraj.setForeground(new java.awt.Color(255, 255, 255));
         btnAutoriziraj.setText("AUTORIZIRAJ");
         btnAutoriziraj.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 0));
+        btnAutoriziraj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutorizirajActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnAutoriziraj, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 190, 40));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Account_50px.png"))); // NOI18N
@@ -125,6 +173,10 @@ public class ProzorLogin extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("molimo registrirajte se!");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
+
+        lblPoruka.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPoruka.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(lblPoruka, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 410, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,10 +197,52 @@ public class ProzorLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
+    private void btnAutorizirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizirajActionPerformed
+       autoriziraj();
+    }//GEN-LAST:event_btnAutorizirajActionPerformed
+
+    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
+      lblPoruka.setText("");
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+           if(txtEmail.getText().isEmpty()){
+               lblPoruka.setText("Obavezno email.");
+               return;
+           }
+           if(pswLozinka.getPassword().length==0){
+               pswLozinka.requestFocus();
+               lblPoruka.setText("Obavezno lozinka.");
+               return;
+           }
+           autoriziraj();
+       }
+    }//GEN-LAST:event_txtEmailKeyPressed
+
+    private void pswLozinkaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswLozinkaKeyPressed
+         lblPoruka.setText("");
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(pswLozinka.getPassword().length==0){
+               pswLozinka.requestFocus();
+               lblPoruka.setText("Obavezno lozinka.");
+               return;
+           }
+          if(txtEmail.getText().isEmpty()){
+               lblPoruka.setText("Obavezno email.");
+               txtEmail.requestFocus();
+               return;
+           }
+          autoriziraj();
+        }
+    }//GEN-LAST:event_pswLozinkaKeyPressed
+
     /**
      * @param args the command line arguments
      */
+   
+    
+  private void setIcon() {
+        
   
+setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.png" )));}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAutoriziraj;
@@ -164,6 +258,7 @@ public class ProzorLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblCrta1;
     private javax.swing.JLabel lblCrta2;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblPoruka;
     private javax.swing.JPasswordField pswLozinka;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
