@@ -39,8 +39,8 @@ public class ObradaOperater extends Obrada<Operater>{
 
     public void unosAdminOperater(){
         Operater o=new Operater();
-        o.setIme("Admin");
-        o.setPrezime("Operater");
+        o.setIme("Isidora");
+        o.setPrezime("Karan");
         o.setEmail("karanisidora@gmail.com");
         o.setOib("09403302317");
         o.setLozinka(BCrypt.hashpw("1111", BCrypt.gensalt()).toCharArray());
