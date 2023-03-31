@@ -1,6 +1,8 @@
 package karan.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Osoba extends Entitet {
@@ -9,6 +11,9 @@ public class Osoba extends Entitet {
     private String prezime;
     private String email;
     private String brojTelefona;
+    
+    @OneToMany(mappedBy = "osoba")
+    private List<Transakcija> transakcije;
 
     public Osoba() {
         super();
@@ -21,6 +26,16 @@ public class Osoba extends Entitet {
         this.email = email;
         this.brojTelefona = brojTelefona;
     }
+
+    public List<Transakcija> getTransakcije() {
+        return transakcije;
+    }
+
+    public void setTransakcije(List<Transakcija> transakcije) {
+        this.transakcije = transakcije;
+    }
+    
+    
 
     public String getIme() {
         return ime;

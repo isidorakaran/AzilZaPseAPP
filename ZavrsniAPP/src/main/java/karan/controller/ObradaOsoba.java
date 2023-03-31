@@ -7,6 +7,7 @@ package karan.controller;
 import java.util.List;
 
 import karan.model.Osoba;
+import karan.model.Transakcija;
 import karan.util.Alati;
 import karan.util.EdunovaException;
 
@@ -18,15 +19,18 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
     @Override
     public List<Osoba> read() {
-        return session.createQuery("from Osoba", Osoba.class).list();
+        return session.createQuery("from Osoba order by ime", Osoba.class).list();
     }
 
     @Override
     protected void kontrolaUnos() throws EdunovaException {
-        kontrolaBrojTelefona();
-        kontrolaEmail();
         kontrolaIme();
-        kontrolaPrezime();
+         kontrolaPrezime();
+          kontrolaEmail();
+        kontrolaBrojTelefona();
+       
+        
+       
 
     }
 
@@ -41,6 +45,23 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
+        if(entitet.getTransakcije()!=null && !entitet.getTransakcije().isEmpty()){
+            
+            StringBuilder sb=new StringBuilder();
+            sb.append("Osoba ");
+            sb.append(entitet.getIme());
+            sb.append(" se ne može obrisati jer pripada razmjeni: ");
+            sb.append("\n");
+            int b=0;
+            for(Transakcija t:entitet.getTransakcije()){
+                sb.append(++b);
+                sb.append(". ");
+                sb.append(t.getOpis());
+                sb.append("\n");
+                
+            }
+            throw new EdunovaException(sb.toString());
+        }
     }
 
     private void kontrolaIme() throws EdunovaException {
@@ -49,6 +70,12 @@ public class ObradaOsoba extends Obrada<Osoba> {
         kontrolaImeNijeBroj();
         KontrolaImeMinIMaxDuzina();
     }
+     private void kontrolaImeNull() throws EdunovaException {
+        if (entitet.getIme() == null) {
+            throw new EdunovaException("Ime mora biti postavljeno");
+        }
+    }
+
 
     private void kontrolaImeNijeZnak() throws EdunovaException {
         for (int i = 0; i < entitet.getIme().length(); i++) {
@@ -62,17 +89,12 @@ public class ObradaOsoba extends Obrada<Osoba> {
     }
 
     private void KontrolaImeMinIMaxDuzina() throws EdunovaException {
-        if (entitet.getIme().trim().length() < 2 || entitet.getIme().trim().length() > 50) {
+        if (entitet.getIme().trim().length() < 3 || entitet.getIme().trim().length() > 50) {
             throw new EdunovaException("Ime osobe ne smije imati manje od 2 i više od 50 znakova");
         }
     }
 
-    private void kontrolaImeNull() throws EdunovaException {
-        if (entitet.getIme() == null) {
-            throw new EdunovaException("Ime mora biti postavljeno");
-        }
-    }
-
+   
     private void kontrolaImeNijeBroj() throws EdunovaException {
         boolean broj = false;
         try {

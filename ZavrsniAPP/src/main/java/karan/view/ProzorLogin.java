@@ -112,10 +112,10 @@ public class ProzorLogin extends javax.swing.JFrame {
         });
         jPanel2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 250, 30));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 38)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Login");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
 
         lblCrta1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblCrta1.setForeground(new java.awt.Color(255, 255, 255));
@@ -167,15 +167,15 @@ public class ProzorLogin extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\WinUSER\\Pictures\\White_paw_print.png")); // NOI18N
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Dobrodišli u aplikaciju Azil za pse,");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 400, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 400, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("molimo registrirajte se!");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
 
         lblPoruka.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPoruka.setForeground(new java.awt.Color(255, 255, 255));

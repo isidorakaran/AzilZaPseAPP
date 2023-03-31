@@ -5,6 +5,7 @@
 package karan.view;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +27,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         initComponents();              
         setTitle(Aplikacija.NAZIV_APP + ": " + Aplikacija.OPERATER.getImePrezime());
         pokreniSat();
+        setIcon();
       
     }
 
@@ -162,6 +164,10 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
        new ProzorOsoba().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+ private void setIcon() {
+        
+  
+setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.png" )));}
 
     /**
      * @param args the command line arguments
