@@ -4,11 +4,14 @@
  */
 package karan.util;
 
+import karan.model.Operater;
+
 /**
  *
  * @author WinUSER
  */
 public class Aplikacija {
     public static final String NAZIV_APP="Azil za pse APP";
+    public static Operater OPERATER;
     
 }

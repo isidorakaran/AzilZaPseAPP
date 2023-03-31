@@ -28,6 +28,7 @@ public class ProzorLogin extends javax.swing.JFrame {
         setTitle(Aplikacija.NAZIV_APP + " Login");
         setIcon();
         
+        
     }
     
     private void autoriziraj(){
@@ -47,6 +48,8 @@ public class ProzorLogin extends javax.swing.JFrame {
             lblPoruka.setText("Neispravna kombinacija email i lozinka.");
             return;
         }
+        
+        Aplikacija.OPERATER=o;
         
         new ProzorIzbornik().setVisible(true);
         dispose();
@@ -90,7 +93,7 @@ public class ProzorLogin extends javax.swing.JFrame {
         lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(255, 255, 255));
         lblEmail.setText("E-mail");
-        jPanel2.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 117, -1));
+        jPanel2.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 117, -1));
 
         txtEmail.setBackground(new java.awt.Color(89, 138, 224));
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -107,23 +110,23 @@ public class ProzorLogin extends javax.swing.JFrame {
                 txtEmailKeyPressed(evt);
             }
         });
-        jPanel2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 250, 30));
+        jPanel2.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 250, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Login");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
 
         lblCrta1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblCrta1.setForeground(new java.awt.Color(255, 255, 255));
         lblCrta1.setText("________________________________");
         lblCrta1.setAlignmentY(0.0F);
-        jPanel2.add(lblCrta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 310, -1));
+        jPanel2.add(lblCrta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 310, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Lozinka");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         pswLozinka.setBackground(new java.awt.Color(89, 138, 224));
         pswLozinka.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -135,16 +138,16 @@ public class ProzorLogin extends javax.swing.JFrame {
                 pswLozinkaKeyPressed(evt);
             }
         });
-        jPanel2.add(pswLozinka, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 240, -1));
+        jPanel2.add(pswLozinka, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 240, -1));
 
         lblCrta2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblCrta2.setForeground(new java.awt.Color(255, 255, 255));
         lblCrta2.setText("________________________________");
         lblCrta2.setAlignmentY(0.0F);
-        jPanel2.add(lblCrta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 310, -1));
+        jPanel2.add(lblCrta2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 310, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Forgot_Password_50px_4.png"))); // NOI18N
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, -1, -1));
 
         btnAutoriziraj.setBackground(new java.awt.Color(89, 138, 224));
         btnAutoriziraj.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -159,20 +162,20 @@ public class ProzorLogin extends javax.swing.JFrame {
         jPanel2.add(btnAutoriziraj, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 190, 40));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Account_50px.png"))); // NOI18N
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\WinUSER\\Pictures\\White_paw_print.png")); // NOI18N
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Dobrodišli u aplikaciju Azil za pse,");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 400, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 400, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("molimo registrirajte se!");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
 
         lblPoruka.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPoruka.setForeground(new java.awt.Color(255, 255, 255));
