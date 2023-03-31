@@ -62,5 +62,7 @@ public class Operater extends Entitet{
     }
     
     
-    
+    public String getImePrezime(){
+        return getIme().substring(0, 1) + getPrezime().substring(0, 1);
+    }
 }
