@@ -26,7 +26,7 @@ public class ObradaVrstaTransakcije extends Obrada<VrstaTransakcije>{
 
     @Override
     protected void kontrolaPromjena() throws EdunovaException {
-        kontrolaNaziv();
+       // kontrolaNaziv();
     }
 
     @Override
@@ -36,8 +36,8 @@ public class ObradaVrstaTransakcije extends Obrada<VrstaTransakcije>{
     private void kontrolaNaziv() throws EdunovaException {
          kontrolaNazivNull();
         kontrolaNazivNijeBroj();
-        kontrolaNazivNijeZnak();
-        KontrolaNazivMinIMaxDuzina();
+       // kontrolaNazivNijeZnak();
+        //KontrolaNazivMinIMaxDuzina();
     }
 
     private void kontrolaNazivNijeBroj() throws EdunovaException{
