@@ -10,6 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import karan.controller.ObradaOsoba;
 import karan.model.Osoba;
+import karan.model.Transakcija;
 import karan.util.Aplikacija;
 import karan.util.EdunovaException;
 
@@ -69,9 +70,11 @@ public class ProzorOsoba extends javax.swing.JFrame {
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstTransakcije = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(760, 600));
 
         jPanel1.setBackground(new java.awt.Color(89, 138, 224));
         jPanel1.setPreferredSize(new java.awt.Dimension(760, 600));
@@ -92,34 +95,34 @@ public class ProzorOsoba extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstPodaci);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 270, 490));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 270, 380));
 
         lblBrTelefona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblBrTelefona.setForeground(new java.awt.Color(255, 255, 255));
         lblBrTelefona.setText("Broj telefona");
-        jPanel1.add(lblBrTelefona, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 100, -1));
+        jPanel1.add(lblBrTelefona, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 100, -1));
 
         txtIme.setBackground(new java.awt.Color(89, 138, 224));
         txtIme.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtIme.setForeground(new java.awt.Color(255, 255, 255));
         txtIme.setBorder(null);
-        jPanel1.add(txtIme, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 230, 30));
+        jPanel1.add(txtIme, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 230, 30));
 
         lblCrtica.setForeground(new java.awt.Color(255, 255, 255));
         lblCrtica.setText("____________________________________________");
-        jPanel1.add(lblCrtica, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, 214, -1));
+        jPanel1.add(lblCrtica, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 214, -1));
 
         lblCrtica1.setForeground(new java.awt.Color(255, 255, 255));
         lblCrtica1.setText("____________________________________________");
-        jPanel1.add(lblCrtica1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 214, -1));
+        jPanel1.add(lblCrtica1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 214, -1));
 
         lblCrtica2.setForeground(new java.awt.Color(255, 255, 255));
         lblCrtica2.setText("____________________________________________");
-        jPanel1.add(lblCrtica2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 214, -1));
+        jPanel1.add(lblCrtica2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 214, -1));
 
         lblCrtica3.setForeground(new java.awt.Color(255, 255, 255));
         lblCrtica3.setText("____________________________________________");
-        jPanel1.add(lblCrtica3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 214, -1));
+        jPanel1.add(lblCrtica3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 214, -1));
 
         txtPrezime.setBackground(new java.awt.Color(89, 138, 224));
         txtPrezime.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -130,22 +133,22 @@ public class ProzorOsoba extends javax.swing.JFrame {
                 txtPrezimeActionPerformed(evt);
             }
         });
-        jPanel1.add(txtPrezime, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 220, 30));
+        jPanel1.add(txtPrezime, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 220, 30));
 
         lblIme.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblIme.setForeground(new java.awt.Color(255, 255, 255));
         lblIme.setText("Ime");
-        jPanel1.add(lblIme, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 37, -1));
+        jPanel1.add(lblIme, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 37, -1));
 
         lblPrezime.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPrezime.setForeground(new java.awt.Color(255, 255, 255));
         lblPrezime.setText("Prezime");
-        jPanel1.add(lblPrezime, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 60, -1));
+        jPanel1.add(lblPrezime, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 60, -1));
 
         lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(255, 255, 255));
         lblEmail.setText("E-mail");
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 60, -1));
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 60, -1));
 
         txtEmail.setBackground(new java.awt.Color(89, 138, 224));
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -156,13 +159,13 @@ public class ProzorOsoba extends javax.swing.JFrame {
                 txtEmailActionPerformed(evt);
             }
         });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 210, 30));
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 210, 30));
 
         txtBrTelefona.setBackground(new java.awt.Color(89, 138, 224));
         txtBrTelefona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtBrTelefona.setForeground(new java.awt.Color(255, 255, 255));
         txtBrTelefona.setBorder(null);
-        jPanel1.add(txtBrTelefona, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 210, 30));
+        jPanel1.add(txtBrTelefona, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 210, 30));
 
         btnDodaj.setBackground(new java.awt.Color(89, 138, 224));
         btnDodaj.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -174,11 +177,11 @@ public class ProzorOsoba extends javax.swing.JFrame {
                 btnDodajActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDodaj, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 90, 40));
+        jPanel1.add(btnDodaj, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, 90, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/White_paw_print.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 500, 450));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 500, 450));
 
         btnPromjeni.setBackground(new java.awt.Color(89, 138, 224));
         btnPromjeni.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -190,7 +193,7 @@ public class ProzorOsoba extends javax.swing.JFrame {
                 btnPromjeniActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPromjeni, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, 100, 40));
+        jPanel1.add(btnPromjeni, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 100, 40));
 
         btnObrisi.setBackground(new java.awt.Color(89, 138, 224));
         btnObrisi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -202,12 +205,26 @@ public class ProzorOsoba extends javax.swing.JFrame {
                 btnObrisiActionPerformed(evt);
             }
         });
-        jPanel1.add(btnObrisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 160, 40));
+        jPanel1.add(btnObrisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 160, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("OSOBE U APLIKACIJI");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 20));
+
+        lstTransakcije.setBorder(null);
+        lstTransakcije.setForeground(new java.awt.Color(89, 138, 224));
+        lstTransakcije.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstTransakcije.setEnabled(false);
+        lstTransakcije.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setViewportView(lstTransakcije);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 490, 140));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("RAZMJENE U KOJIMA SU UČESTVOVALE OSOBE");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,7 +246,7 @@ public class ProzorOsoba extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        obrada.setEntitet(new Osoba());
+       obrada.setEntitet(new Osoba());
         napuniModel();
         try {
             obrada.create();
@@ -300,7 +317,18 @@ public class ProzorOsoba extends javax.swing.JFrame {
         txtPrezime.setText(o.getPrezime());
         txtEmail.setText(o.getEmail());
         txtBrTelefona.setText(o.getBrojTelefona());
+        
+        DefaultListModel<Transakcija> m=new DefaultListModel<>();
+        
+        if(o.getTransakcije()!=null && !o.getTransakcije().isEmpty()){
+            
+            m.addAll(o.getTransakcije());
+        
+             
+        lstTransakcije.setModel(m);
+        lstTransakcije.repaint();
 
+    }
     }
 
     private void napuniModel() {
@@ -321,8 +349,10 @@ public class ProzorOsoba extends javax.swing.JFrame {
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBrTelefona;
     private javax.swing.JLabel lblCrtica;
     private javax.swing.JLabel lblCrtica1;
@@ -332,6 +362,7 @@ public class ProzorOsoba extends javax.swing.JFrame {
     private javax.swing.JLabel lblIme;
     private javax.swing.JLabel lblPrezime;
     private javax.swing.JList<Osoba> lstPodaci;
+    private javax.swing.JList<Transakcija> lstTransakcije;
     private javax.swing.JTextField txtBrTelefona;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtIme;
