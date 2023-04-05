@@ -112,8 +112,8 @@ public class SplashScreen extends javax.swing.JFrame {
     private void ucitaj()  {
         
         new Ucitavanje().start();
-        new UcitavanjeGif().start();
-        new UcitanjeProzorLogin().start();
+        PozadinaGif.setVisible(true);
+        
       
     }
     
@@ -169,10 +169,13 @@ public class SplashScreen extends javax.swing.JFrame {
                      if(i==90){
                       lblUcitavanje.setText("Uspješno pokretanje aplikacije!");
                   }
+                     
                   
                   barUcitavanjeBar.setValue(i);
                  
             }
+            dispose();
+            new ProzorLogin().setVisible(true);
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -182,7 +185,7 @@ public class SplashScreen extends javax.swing.JFrame {
         
     }
     
-     private class UcitavanjeGif extends Thread{
+    /* private class UcitavanjeGif extends Thread{
         public void run(){
          try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -204,7 +207,7 @@ public class SplashScreen extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
         }
     HibernateUtil.getSession();
-    PozadinaGif.setVisible(true);
+   
             try {
                 Thread.sleep(60);
             } catch (InterruptedException e) {
@@ -212,7 +215,7 @@ public class SplashScreen extends javax.swing.JFrame {
             }
     
 }
-     }
+     }*/
 private class UcitanjeProzorLogin extends Thread{
 
         @Override
