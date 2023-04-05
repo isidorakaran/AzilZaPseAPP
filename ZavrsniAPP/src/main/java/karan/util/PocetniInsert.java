@@ -28,7 +28,6 @@ public class PocetniInsert {
     private static int BROJ_OSOBA = 20;
     private static int BROJ_PASA = 50;
     private static int BROJ_TRANSAKCIJA = 50;
-    private static int BROJ_VRSTATRANSAKCIJE = 2;
 
     private Faker faker;
     private List<Osoba> osobe;
@@ -68,13 +67,18 @@ public class PocetniInsert {
     }
 
     private void kreirajVrsteTransakcije() {
-        VrstaTransakcije vt;
-        for (int i = 0; i < BROJ_VRSTATRANSAKCIJE; i++) {
-            vt = new VrstaTransakcije();
-            vt.setNaziv(faker.demographic().sex().replaceAll("Male", "In").replaceAll("Female", "Out"));
-            session.persist(vt);
-            vrsteTransakcije.add(vt);
-        }
+        VrstaTransakcije vtIn, vtOut;
+        vtIn = new VrstaTransakcije();
+        vtOut = new VrstaTransakcije();
+        vtIn.setNaziv("Trenutno u azilu");
+        vtIn.setPredznak(1);
+        vtOut.setNaziv("Van azila");
+        vtOut.setPredznak(-1);
+        session.persist(vtIn);
+        session.persist(vtOut);
+        vrsteTransakcije.add(vtIn);
+        vrsteTransakcije.add(vtOut);
+
     }
 
     private void kreirajTransakcije() {
@@ -85,7 +89,7 @@ public class PocetniInsert {
             t.setOpis(faker.harryPotter().quote());
             t.setNapomena(faker.lordOfTheRings().character());
             t.setOsoba(osobe.get(sb(0, BROJ_OSOBA - 1)));
-            t.setVrstaTransakcije(vrsteTransakcije.get(sb(0, BROJ_VRSTATRANSAKCIJE - 1)));
+            t.setVrstaTransakcije(vrsteTransakcije.get(sb(0, vrsteTransakcije.size() - 1)));
             session.persist(t);
             transakcije.add(t);
         }
@@ -98,7 +102,7 @@ public class PocetniInsert {
         for (int i = 0; i < BROJ_PASA; i++) {
             p = new Pas();
             p.setIme(faker.dog().name());
-            p.setDob(faker.number().numberBetween(1, 11)+" "+faker.demographic().sex().replaceAll("Male", "Month").replaceAll("Female", "Year"));
+            p.setDob(faker.number().numberBetween(1, 11) + " " + faker.demographic().sex().replaceAll("Male", "Month").replaceAll("Female", "Year"));
             p.setKilaza(new BigDecimal(faker.number().numberBetween(0, 30)));
             p.setMjesavina(faker.bool().bool());
             p.setPol(faker.dog().gender());
@@ -115,7 +119,5 @@ public class PocetniInsert {
     private int sb(int min, int max) {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
-    
-  
-    
+
 }
