@@ -70,8 +70,7 @@ public class Transakcija extends Entitet {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return datum + opis + napomena;
-    }
-
+    
+return opis;
+}
 }
