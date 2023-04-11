@@ -6,6 +6,7 @@ package karan.controller;
 
 import java.util.List;
 import karan.model.Transakcija;
+import karan.model.VrstaTransakcije;
 import karan.util.EdunovaException;
 
 /**
@@ -18,9 +19,21 @@ public class ObradaTransakcija extends Obrada<Transakcija> {
     public List<Transakcija> read() {
         return session.createQuery("from Transakcija", Transakcija.class).list();
     }
+    
+     public List<Transakcija> read(VrstaTransakcije vt) {
+        return session.createQuery("from Transakcija " +
+                " where vrstaTransakcije=:vrstaTransakcije", Transakcija.class)
+                .setParameter("vrstaTransakcije", vt).list();
+    }
 
     @Override
     protected void kontrolaUnos() throws EdunovaException {
+        if(entitet.getVrstaTransakcije().getSifra()==0){
+            throw new EdunovaException("Obavezno odabir vrste razmjene!");
+        }
+        if(entitet.getOsoba().getSifra()==0){
+            entitet.setOsoba(null);
+        }
         kontrolaOpis();
         kontrolaNapomena();
     }

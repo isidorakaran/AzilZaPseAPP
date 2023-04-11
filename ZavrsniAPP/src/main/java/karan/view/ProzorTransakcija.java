@@ -4,17 +4,111 @@
  */
 package karan.view;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.TimePickerSettings;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import karan.controller.ObradaOsoba;
+import karan.controller.ObradaTransakcija;
+import karan.controller.ObradaVrstaTransakcije;
+import karan.model.Osoba;
+import karan.model.Transakcija;
+import karan.model.VrstaTransakcije;
+import karan.util.Aplikacija;
+
 /**
  *
  * @author WinUSER
  */
 public class ProzorTransakcija extends javax.swing.JFrame {
+    
+    private ObradaTransakcija obrada;
 
     /**
      * Creates new form ProzorTransakcija
      */
     public ProzorTransakcija() {
         initComponents();
+        obrada=new ObradaTransakcija();
+         setTitle(Aplikacija.NAZIV_APP + ": " + Aplikacija.OPERATER.getImePrezime() + ": Razmjene");
+          definirajDatum();
+         ucitajFilterVrste();
+         ucitajVrsteTransakcije();
+         ucitajOsobe();
+        ucitaj();
+    }
+    
+    private void ucitaj(){
+         DefaultListModel<Transakcija> m = new DefaultListModel<>();
+        m.addAll(obrada.read((VrstaTransakcije)cmbFilterVrste.getSelectedItem()));
+        lstPodaci.setModel(m);
+        lstPodaci.repaint();
+    }
+    
+    private void definirajDatum(){
+         DatePickerSettings dps = 
+                new DatePickerSettings(new Locale("hr","HR"));
+       dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
+       dps.setTranslationClear("Očisti");
+       dps.setTranslationToday("Danas");
+   dtpDatum.datePicker.setSettings(dps);
+       
+       
+        TimePickerSettings tps = new TimePickerSettings(new Locale("hr","HR"));
+        tps.setFormatForDisplayTime("HH:mm");
+      
+        dtpDatum.timePicker
+                .getSettings()
+         
+               .use24HourClockFormat();
+        
+        ArrayList<LocalTime> lista = new ArrayList<>();
+        
+        for(int j=0;j<24;j++){
+        for(int i=0;i<60;i+=5){
+            lista.add(LocalTime.of(j, i));
+        }
+        }
+        
+        
+        dtpDatum.timePicker.getSettings()
+                .generatePotentialMenuTimes(lista);
+        
+    }
+    
+    private void ucitajVrsteTransakcije(){
+        DefaultComboBoxModel<VrstaTransakcije> m=new DefaultComboBoxModel<>();
+         VrstaTransakcije vt= new VrstaTransakcije();
+         vt.setSifra(0);
+         vt.setNaziv("Nije odabrano");
+         m.addElement(vt);
+        m.addAll(new ObradaVrstaTransakcije().read());
+        cmbVrstaTransakcije.setModel(m);
+        cmbVrstaTransakcije.repaint();
+    }
+    
+    private void ucitajOsobe(){
+         DefaultComboBoxModel<Osoba> m=new DefaultComboBoxModel<>();
+         Osoba o= new Osoba();
+         o.setSifra(0);
+         o.setIme("Nije ");
+         o.setPrezime("odabrano");
+         m.addElement(o);
+        m.addAll(new ObradaOsoba().read());
+        cmbOsobe.setModel(m);
+        cmbOsobe.repaint();
+    }
+    private void ucitajFilterVrste(){
+        DefaultComboBoxModel<VrstaTransakcije> m=new DefaultComboBoxModel<>();
+        m.addAll(new ObradaVrstaTransakcije().read());
+        cmbFilterVrste.setModel(m);
+        cmbFilterVrste.repaint();
+        cmbFilterVrste.setSelectedIndex(0);
     }
 
     /**
@@ -35,15 +129,18 @@ public class ProzorTransakcija extends javax.swing.JFrame {
         dtpDatum = new com.github.lgooddatepicker.components.DateTimePicker();
         cmbOsobe = new javax.swing.JComboBox<>();
         cmbVrstaTransakcije = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstPodaci = new javax.swing.JList<>();
+        cmbFilterVrste = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(89, 138, 224));
         jPanel1.setPreferredSize(new java.awt.Dimension(760, 600));
 
+        jLabel1.setText("Opis");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Opis");
 
         txtOpis.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtOpis.setForeground(new java.awt.Color(89, 138, 224));
@@ -53,9 +150,9 @@ public class ProzorTransakcija extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Napomena");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Napomena");
 
         txtNapomena.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNapomena.setForeground(new java.awt.Color(89, 138, 224));
@@ -65,9 +162,30 @@ public class ProzorTransakcija extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Datum");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Datum");
+
+        lstPodaci.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lstPodaci.setForeground(new java.awt.Color(89, 138, 224));
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.setToolTipText("");
+        lstPodaci.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lstPodaci.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        lstPodaci.setSelectionBackground(new java.awt.Color(89, 138, 224));
+        lstPodaci.setSelectionForeground(new java.awt.Color(251, 225, 183));
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
+
+        cmbFilterVrste.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbFilterVrsteItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,32 +199,43 @@ public class ProzorTransakcija extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbOsobe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtOpis, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNapomena, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(dtpDatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(502, Short.MAX_VALUE))
+                    .addComponent(txtOpis)
+                    .addComponent(txtNapomena)
+                    .addComponent(dtpDatum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(cmbFilterVrste, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(77, 77, 77))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtOpis, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNapomena, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dtpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbFilterVrste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtOpis, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNapomena, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dtpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbVrstaTransakcije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)))
                 .addComponent(cmbOsobe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(cmbVrstaTransakcije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
+                .addGap(134, 134, 134))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,7 +248,7 @@ public class ProzorTransakcija extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
 
         pack();
@@ -134,16 +263,58 @@ public class ProzorTransakcija extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNapomenaActionPerformed
 
-   
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+        if (lstPodaci.getSelectedValue() == null) {
+            return;
+        }
+        obrada.setEntitet(lstPodaci.getSelectedValue());
+        napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
 
+    private void cmbFilterVrsteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFilterVrsteItemStateChanged
+        ucitaj();
+    }//GEN-LAST:event_cmbFilterVrsteItemStateChanged
+
+   private void napuniView(){
+       
+       var e=obrada.getEntitet();
+       txtOpis.setText(e.getOpis());
+       txtNapomena.setText(e.getNapomena());
+       cmbVrstaTransakcije.setSelectedItem(e.getVrstaTransakcije());
+       if(e.getOsoba()!=null){
+           cmbOsobe.setSelectedItem(e.getOsoba());
+       }else{
+           cmbOsobe.setSelectedIndex(0);
+       }
+       if(e.getDatum()!=null){
+             LocalDate ld = e.getDatum()
+                .toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        dtpDatum.datePicker.setDate(ld);
+        }else{
+            dtpDatum.datePicker.setDate(null);
+        }
+       
+   }
+
+   private void napuniModel(){
+       
+   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbOsobe;
-    private javax.swing.JComboBox<String> cmbVrstaTransakcije;
+    private javax.swing.JComboBox<VrstaTransakcije> cmbFilterVrste;
+    private javax.swing.JComboBox<Osoba> cmbOsobe;
+    private javax.swing.JComboBox<VrstaTransakcije> cmbVrstaTransakcije;
     private com.github.lgooddatepicker.components.DateTimePicker dtpDatum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<Transakcija> lstPodaci;
     private javax.swing.JTextField txtNapomena;
     private javax.swing.JTextField txtOpis;
     // End of variables declaration//GEN-END:variables
