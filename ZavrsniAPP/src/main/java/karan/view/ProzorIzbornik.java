@@ -28,13 +28,13 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     public ProzorIzbornik() {
         initComponents();              
         setTitle(Aplikacija.NAZIV_APP + ": " + Aplikacija.OPERATER.getImePrezime());
-        showImages(broj);
+       // showImages(broj);
         pokreniSat();
         setIcon();
         
       
     }
-    
+    /*
     int broj=0;
     
      public String[] getImages()
@@ -53,7 +53,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         ImageIcon icon=new ImageIcon(getClass().getResource("karan/images/"+imageName));
           Image image = icon.getImage().getScaledInstance(lblSlike.getWidth(), lblSlike.getHeight(), Image.SCALE_SMOOTH);
           lblSlike.setIcon(new ImageIcon(image));
-    }
+    }*/
 
     private void pokreniSat() {
         new Vrijeme().start();

@@ -7,12 +7,15 @@ package karan.view;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.components.TimePickerSettings;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import karan.controller.ObradaOsoba;
 import karan.controller.ObradaTransakcija;
 import karan.controller.ObradaVrstaTransakcije;
@@ -20,6 +23,7 @@ import karan.model.Osoba;
 import karan.model.Transakcija;
 import karan.model.VrstaTransakcije;
 import karan.util.Aplikacija;
+import karan.util.EdunovaException;
 
 /**
  *
@@ -36,10 +40,11 @@ public class ProzorTransakcija extends javax.swing.JFrame {
         initComponents();
         obrada=new ObradaTransakcija();
          setTitle(Aplikacija.NAZIV_APP + ": " + Aplikacija.OPERATER.getImePrezime() + ": Razmjene");
-          definirajDatum();
+          
          ucitajFilterVrste();
          ucitajVrsteTransakcije();
          ucitajOsobe();
+         definirajDatum();
         ucitaj();
     }
     
@@ -132,15 +137,23 @@ public class ProzorTransakcija extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
         cmbFilterVrste = new javax.swing.JComboBox<>();
+        btnDodaj = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(760, 600));
 
         jPanel1.setBackground(new java.awt.Color(89, 138, 224));
         jPanel1.setPreferredSize(new java.awt.Dimension(760, 600));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Opis");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 21, 54, -1));
 
         txtOpis.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtOpis.setForeground(new java.awt.Color(89, 138, 224));
@@ -149,10 +162,12 @@ public class ProzorTransakcija extends javax.swing.JFrame {
                 txtOpisActionPerformed(evt);
             }
         });
+        jPanel1.add(txtOpis, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 52, 236, 55));
 
         jLabel2.setText("Napomena");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 138, -1, -1));
 
         txtNapomena.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNapomena.setForeground(new java.awt.Color(89, 138, 224));
@@ -161,19 +176,26 @@ public class ProzorTransakcija extends javax.swing.JFrame {
                 txtNapomenaActionPerformed(evt);
             }
         });
+        jPanel1.add(txtNapomena, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 172, 236, 54));
 
         jLabel3.setText("Datum");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 79, -1));
+        jPanel1.add(dtpDatum, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 236, -1));
+
+        jPanel1.add(cmbOsobe, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 236, -1));
+
+        jPanel1.add(cmbVrstaTransakcije, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, 236, -1));
 
         lstPodaci.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lstPodaci.setForeground(new java.awt.Color(89, 138, 224));
         lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        lstPodaci.setToolTipText("");
         lstPodaci.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lstPodaci.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        lstPodaci.setForeground(new java.awt.Color(89, 138, 224));
         lstPodaci.setSelectionBackground(new java.awt.Color(89, 138, 224));
         lstPodaci.setSelectionForeground(new java.awt.Color(251, 225, 183));
+        lstPodaci.setToolTipText("");
         lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstPodaciValueChanged(evt);
@@ -181,62 +203,60 @@ public class ProzorTransakcija extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstPodaci);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 92, 270, 467));
+
         cmbFilterVrste.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbFilterVrsteItemStateChanged(evt);
             }
         });
+        jPanel1.add(cmbFilterVrste, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 52, 270, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbVrstaTransakcije, 0, 236, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbOsobe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtOpis)
-                    .addComponent(txtNapomena)
-                    .addComponent(dtpDatum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                    .addComponent(cmbFilterVrste, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(77, 77, 77))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmbFilterVrste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtOpis, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNapomena, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dtpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmbVrstaTransakcije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)))
-                .addComponent(cmbOsobe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
-        );
+        btnDodaj.setText("Dodaj");
+        btnDodaj.setBackground(new java.awt.Color(89, 138, 224));
+        btnDodaj.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDodaj.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnDodaj.setForeground(new java.awt.Color(255, 255, 255));
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDodaj, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 78, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Vrsta razmjene");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 149, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Osobe");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 103, 35));
+
+        btnPromjeni.setBackground(new java.awt.Color(89, 138, 224));
+        btnPromjeni.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnPromjeni.setForeground(new java.awt.Color(255, 255, 255));
+        btnPromjeni.setText("Promjeni");
+        btnPromjeni.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPromjeni, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, -1, -1));
+
+        btnObrisi.setBackground(new java.awt.Color(89, 138, 224));
+        btnObrisi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnObrisi.setForeground(new java.awt.Color(255, 255, 255));
+        btnObrisi.setText("Obriši");
+        btnObrisi.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnObrisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 80, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,7 +268,7 @@ public class ProzorTransakcija extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
 
         pack();
@@ -278,6 +298,51 @@ public class ProzorTransakcija extends javax.swing.JFrame {
         ucitaj();
     }//GEN-LAST:event_cmbFilterVrsteItemStateChanged
 
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+       obrada.setEntitet(new Transakcija());
+       napuniModel();
+        try {
+            obrada.create();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+       if(lstPodaci.getSelectedValue()==null){
+              JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite razmjenu");
+              return;
+          }
+          napuniModel();
+          
+          try {
+            obrada.update();
+              ucitaj();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite razmjenu.");
+            return;
+        }
+        if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati razmjenu: " + obrada.getEntitet().getOpis()+"?",
+                "Brisanje ",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+            return;
+        }
+        
+        try {
+            obrada.delete();
+            ucitaj();
+            
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+        
+    }//GEN-LAST:event_btnObrisiActionPerformed
+
    private void napuniView(){
        
        var e=obrada.getEntitet();
@@ -302,9 +367,29 @@ public class ProzorTransakcija extends javax.swing.JFrame {
    }
 
    private void napuniModel(){
+        var t = obrada.getEntitet();
+        t.setOpis(txtOpis.getText());
+        t.setNapomena(txtNapomena.getText());
+        t.setOsoba((Osoba) cmbOsobe.getSelectedItem());
+        t.setVrstaTransakcije((VrstaTransakcije) cmbVrstaTransakcije.getSelectedItem());
+        
+        LocalDate ld = dtpDatum.datePicker.getDate();
+ 
+        LocalTime lt = dtpDatum.timePicker.getTime();
+   
+         LocalDateTime fromDateAndTime = LocalDateTime.of(ld,
+                                                           lt);
+        
+        Date datum = Date.from(fromDateAndTime.atZone(ZoneId.systemDefault()).toInstant());
+        
+        
+        t.setDatum(datum);
        
    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JComboBox<VrstaTransakcije> cmbFilterVrste;
     private javax.swing.JComboBox<Osoba> cmbOsobe;
     private javax.swing.JComboBox<VrstaTransakcije> cmbVrstaTransakcije;
@@ -312,6 +397,8 @@ public class ProzorTransakcija extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Transakcija> lstPodaci;
