@@ -3,14 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package karan.view;
-
+import java.io.File;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import karan.util.Aplikacija;
 
@@ -26,9 +28,31 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     public ProzorIzbornik() {
         initComponents();              
         setTitle(Aplikacija.NAZIV_APP + ": " + Aplikacija.OPERATER.getImePrezime());
+        showImages(broj);
         pokreniSat();
         setIcon();
+        
       
+    }
+    
+    int broj=0;
+    
+     public String[] getImages()
+    {
+
+     File file = new File(getClass().getResource("/karan/images").getFile());
+     
+
+      return file.list();
+
+    }
+    
+    public final void showImages(int index){
+        String[] imageList=getImages();
+        String imageName=imageList[index];
+        ImageIcon icon=new ImageIcon(getClass().getResource("karan/images/"+imageName));
+          Image image = icon.getImage().getScaledInstance(lblSlike.getWidth(), lblSlike.getHeight(), Image.SCALE_SMOOTH);
+          lblSlike.setIcon(new ImageIcon(image));
     }
 
     private void pokreniSat() {
@@ -72,14 +96,22 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         lblVrijeme = new javax.swing.JLabel();
+        lblSlike = new javax.swing.JLabel();
+        btnPrvaSlika = new javax.swing.JButton();
+        btnSljedeca = new javax.swing.JButton();
+        btnPretkodna = new javax.swing.JButton();
+        btnPosljednja = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +133,19 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jToolBar1.add(lblVrijeme);
 
         jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 570, 790, 30));
+        jPanel1.add(lblSlike, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 410, 330));
+
+        btnPrvaSlika.setText("Prva slika");
+        jPanel1.add(btnPrvaSlika, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
+
+        btnSljedeca.setText("Sljedeća");
+        jPanel1.add(btnSljedeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, -1, -1));
+
+        btnPretkodna.setText("Prethodna");
+        jPanel1.add(btnPretkodna, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 510, -1, -1));
+
+        btnPosljednja.setText("Posljednja slika");
+        jPanel1.add(btnPosljednja, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
 
         jMenuBar1.setBackground(new java.awt.Color(89, 138, 224));
         jMenuBar1.setBorder(null);
@@ -108,7 +153,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jMenuBar1.setBorderPainted(false);
         jMenuBar1.setOpaque(true);
 
-        jMenu1.setText("Aplikacija");
+        jMenu1.setText("Programi");
 
         jMenuItem1.setText("Psi");
         jMenu1.add(jMenuItem1);
@@ -139,6 +184,29 @@ public class ProzorIzbornik extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu4.setText("Aplikacija");
+
+        jMenuItem5.setText("O nama");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        jMenuItem6.setText("Radno vrijeme");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem6);
+
+        jMenuItem7.setText("Kontakt informacije");
+        jMenu4.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu4);
+
         jMenu2.setText("Izlaz");
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -146,9 +214,6 @@ public class ProzorIzbornik extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("O aplikaciji");
-        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -182,6 +247,14 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         new ProzorTransakcija().setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
  private void setIcon() {
         
   
@@ -193,6 +266,10 @@ setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPosljednja;
+    private javax.swing.JButton btnPretkodna;
+    private javax.swing.JButton btnPrvaSlika;
+    private javax.swing.JButton btnSljedeca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -202,8 +279,12 @@ setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lblSlike;
     private javax.swing.JLabel lblVrijeme;
     // End of variables declaration//GEN-END:variables
 }
