@@ -156,6 +156,11 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jMenu1.setText("Programi");
 
         jMenuItem1.setText("Psi");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Osobe");
@@ -255,6 +260,10 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       new ProzorPsi().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
  private void setIcon() {
         
   

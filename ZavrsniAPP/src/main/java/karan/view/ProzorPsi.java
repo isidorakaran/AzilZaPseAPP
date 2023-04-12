@@ -4,18 +4,43 @@
  */
 package karan.view;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+import javax.swing.DefaultListModel;
+import karan.controller.ObradaPas;
+import karan.model.Pas;
+import karan.util.Aplikacija;
+
 /**
  *
  * @author WinUSER
  */
 public class ProzorPsi extends javax.swing.JFrame {
-
+private ObradaPas obrada;
+  private DecimalFormat df;
     /**
      * Creates new form ProzorPsi
      */
     public ProzorPsi() {
         initComponents();
+        obrada = new ObradaPas();
+         DecimalFormatSymbols dfs = 
+                new DecimalFormatSymbols(
+                        new Locale("hr", "HR"));
+        df = new DecimalFormat("###,##0.00",dfs);
+        setTitle(Aplikacija.NAZIV_APP + ": " + Aplikacija.OPERATER.getImePrezime() + ": Psi");
+        ucitaj();
     }
+    
+     public void ucitaj(){
+        DefaultListModel<Pas> m = 
+                new DefaultListModel<>();
+        m.addAll(obrada.read());
+        
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,12 +52,90 @@ public class ProzorPsi extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        lblCrtica1 = new javax.swing.JLabel();
+        lblCrtica2 = new javax.swing.JLabel();
+        lblCrtica3 = new javax.swing.JLabel();
+        lblCrtica4 = new javax.swing.JLabel();
+        chbMjesanac = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtPol = new javax.swing.JTextField();
+        txtKilaza = new javax.swing.JTextField();
+        txtIme = new javax.swing.JTextField();
+        txtDob = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(89, 138, 224));
         jPanel1.setPreferredSize(new java.awt.Dimension(760, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCrtica1.setForeground(new java.awt.Color(255, 255, 255));
+        lblCrtica1.setText("____________________________________________");
+        jPanel1.add(lblCrtica1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 214, -1));
+
+        lblCrtica2.setForeground(new java.awt.Color(255, 255, 255));
+        lblCrtica2.setText("____________________________________________");
+        jPanel1.add(lblCrtica2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 214, -1));
+
+        lblCrtica3.setForeground(new java.awt.Color(255, 255, 255));
+        lblCrtica3.setText("____________________________________________");
+        jPanel1.add(lblCrtica3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 214, -1));
+
+        lblCrtica4.setForeground(new java.awt.Color(255, 255, 255));
+        lblCrtica4.setText("____________________________________________");
+        jPanel1.add(lblCrtica4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 214, 30));
+
+        chbMjesanac.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chbMjesanac.setForeground(new java.awt.Color(255, 255, 255));
+        chbMjesanac.setText("Mješanac");
+        jPanel1.add(chbMjesanac, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Ime");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 40, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Pol");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 40, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Dob");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 40, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Kilaža");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 80, -1));
+
+        txtPol.setBackground(new java.awt.Color(89, 138, 224));
+        txtPol.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPol.setForeground(new java.awt.Color(255, 255, 255));
+        txtPol.setBorder(null);
+        jPanel1.add(txtPol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 210, 30));
+
+        txtKilaza.setBackground(new java.awt.Color(89, 138, 224));
+        txtKilaza.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtKilaza.setForeground(new java.awt.Color(255, 255, 255));
+        txtKilaza.setBorder(null);
+        jPanel1.add(txtKilaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 210, 30));
+
+        txtIme.setBackground(new java.awt.Color(89, 138, 224));
+        txtIme.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtIme.setForeground(new java.awt.Color(255, 255, 255));
+        txtIme.setBorder(null);
+        jPanel1.add(txtIme, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 210, 30));
+
+        txtDob.setBackground(new java.awt.Color(89, 138, 224));
+        txtDob.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDob.setForeground(new java.awt.Color(255, 255, 255));
+        txtDob.setBorder(null);
+        jPanel1.add(txtDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 210, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,7 +157,48 @@ public class ProzorPsi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
+    public void napuniView(){
+        var p = obrada.getEntitet();
+        txtIme.setText(p.getIme());
+        txtDob.setText(p.getDob());
+        txtPol.setText(p.getPol());
+         try {
+            txtKilaza.setText(df.format(p.getKilaza()));
+        } catch (Exception e) {
+            txtKilaza.setText("");
+        }
+        chbMjesanac.setSelected(p.isMjesavina());
+        
+    }
+    
+    
+    public void napuniModel(){
+         var p = obrada.getEntitet();
+        p.setIme(txtIme.getText());
+        p.setDob(txtDob.getText());
+        p.setPol(txtPol.getText());
+         try {
+            p.setKilaza(BigDecimal.valueOf(df.parse(txtKilaza.getText()).doubleValue()));
+        } catch (Exception e) {
+            p.setKilaza(BigDecimal.ZERO);
+        }
+          p.setMjesavina(chbMjesanac.isSelected());
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chbMjesanac;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCrtica1;
+    private javax.swing.JLabel lblCrtica2;
+    private javax.swing.JLabel lblCrtica3;
+    private javax.swing.JLabel lblCrtica4;
+    private javax.swing.JTextField txtDob;
+    private javax.swing.JTextField txtIme;
+    private javax.swing.JTextField txtKilaza;
+    private javax.swing.JTextField txtPol;
     // End of variables declaration//GEN-END:variables
 }
