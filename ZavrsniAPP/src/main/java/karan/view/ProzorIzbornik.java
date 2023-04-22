@@ -102,6 +102,8 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         btnSljedeca = new javax.swing.JButton();
         btnPretkodna = new javax.swing.JButton();
         btnPosljednja = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -134,7 +136,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jToolBar1.add(lblVrijeme);
 
         jPanel1.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 570, 790, 30));
-        jPanel1.add(lblSlike, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 410, 330));
+        jPanel1.add(lblSlike, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 390, 400));
 
         btnPrvaSlika.setText("Prva slika");
         btnPrvaSlika.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +144,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
                 btnPrvaSlikaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPrvaSlika, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
+        jPanel1.add(btnPrvaSlika, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, -1, -1));
 
         btnSljedeca.setText("Sljedeća");
         btnSljedeca.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +152,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
                 btnSljedecaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSljedeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, -1, -1));
+        jPanel1.add(btnSljedeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, -1, -1));
 
         btnPretkodna.setText("Prethodna");
         btnPretkodna.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +160,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
                 btnPretkodnaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPretkodna, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, -1, -1));
+        jPanel1.add(btnPretkodna, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 490, -1, -1));
 
         btnPosljednja.setText("Posljednja slika");
         btnPosljednja.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +168,15 @@ public class ProzorIzbornik extends javax.swing.JFrame {
                 btnPosljednjaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPosljednja, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
+        jPanel1.add(btnPosljednja, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(89, 138, 224));
+        jLabel3.setText("FOTO ALBUM");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/okvir4.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-160, 20, 680, 530));
 
         jMenuBar1.setBackground(new java.awt.Color(89, 138, 224));
         jMenuBar1.setBorder(null);
@@ -326,6 +336,8 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     private javax.swing.JButton btnPrvaSlika;
     private javax.swing.JButton btnSljedeca;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
