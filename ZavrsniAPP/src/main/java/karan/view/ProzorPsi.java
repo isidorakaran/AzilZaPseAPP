@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -92,6 +94,7 @@ private ObradaTransakcija obradaTransakcija;
         jScrollPane3 = new javax.swing.JScrollPane();
         lstSveTransakcije = new javax.swing.JList<>();
         jLabel6 = new javax.swing.JLabel();
+        btnDodajTransakciju = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -228,6 +231,16 @@ private ObradaTransakcija obradaTransakcija;
         jLabel6.setText("INFORMACIJE O IZABRANOM PSU");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
+        btnDodajTransakciju.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDodajTransakciju.setForeground(new java.awt.Color(89, 138, 224));
+        btnDodajTransakciju.setText("^^");
+        btnDodajTransakciju.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajTransakcijuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDodajTransakciju, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 90, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -280,6 +293,43 @@ private ObradaTransakcija obradaTransakcija;
         ucitajTransakcije();
     }//GEN-LAST:event_btnTraziActionPerformed
 
+    private void btnDodajTransakcijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajTransakcijuActionPerformed
+        if(lstSveTransakcije.getSelectedValuesList()==null || lstSveTransakcije.getSelectedValuesList().isEmpty()){
+            JOptionPane.showMessageDialog(getRootPane(), "Prvo pronađite transakciju");
+            return;
+        }
+        
+        if(lstTransakcijePasa.getModel()==null || !(lstTransakcijePasa.getModel() instanceof DefaultListModel<Transakcija>)){
+            lstTransakcijePasa.setModel(new DefaultListModel<Transakcija>());
+        }
+        
+       // DefaultListModel<Transakcija> m=(DefaultListModel<Transakcija>)lstTransakcijePasa.getModel();
+       // m.addAll(lstSveTransakcije.getSelectedValuesList());
+        DefaultListModel<Transakcija> m = 
+                (DefaultListModel<Transakcija>) lstTransakcijePasa.getModel();
+        
+        DefaultListModel<Transakcija> t = 
+                (DefaultListModel<Transakcija>) lstTransakcijePasa.getModel();
+        boolean postoji;
+        for(Transakcija tr : lstSveTransakcije.getSelectedValuesList()){
+            postoji=false;
+            for(int i=0;i<t.getSize();i++){
+                if(tr.getSifra()==t.get(i).getSifra()){
+                    postoji=true;
+                    break;
+                }
+            }
+            if(!postoji){
+                 t.addElement(tr);
+            }
+        }
+        lstTransakcijePasa.repaint();
+        
+        
+        
+        
+    }//GEN-LAST:event_btnDodajTransakcijuActionPerformed
+
     
     public void ucitajTransakcije(){
         DefaultListModel<Transakcija> m=new DefaultListModel<>();
@@ -322,10 +372,23 @@ private ObradaTransakcija obradaTransakcija;
             p.setKilaza(BigDecimal.ZERO);
         }
           p.setMjesavina(chbMjesanac.isSelected());
+          
+          List<Transakcija> t = new ArrayList<>();
+        try {
+            DefaultListModel<Transakcija> m = (DefaultListModel<Transakcija>) lstTransakcijePasa.getModel();
+            for(int i=0;i<m.getSize();i++){
+                t.add(m.getElementAt(i));
+            }
+        } catch (Exception ex) {
+            
+        }
+        p.setTransakcije(t);
+        
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnDodajTransakciju;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JCheckBox chbMjesanac;
     private javax.swing.JLabel jLabel1;

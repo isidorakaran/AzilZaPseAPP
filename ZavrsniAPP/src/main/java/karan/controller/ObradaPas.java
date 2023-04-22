@@ -24,9 +24,10 @@ public class ObradaPas extends Obrada<Pas> {
         return session.createQuery("from Pas", Pas.class).list();
     }
     
+  
    
 
-   /* public List<Pas> read(VrstaTransakcije vt) {
+  /* public List<Pas> read(VrstaTransakcije vt) {
         List<Pas> p = new ArrayList<>();
         List<Object[]> lista = session.createNativeQuery(
                 " select a.* "
