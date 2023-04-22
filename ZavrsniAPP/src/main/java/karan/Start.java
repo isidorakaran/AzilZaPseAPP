@@ -30,7 +30,7 @@ public class Start {
    //new PocetniInsert();
  new SplashScreen().setVisible(true);
   
-      /*ObradaOperater oo=new ObradaOperater();
+  /*    ObradaOperater oo=new ObradaOperater();
         oo.unosAdminOperater();*/
    
        

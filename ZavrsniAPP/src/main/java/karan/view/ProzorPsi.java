@@ -4,6 +4,7 @@
  */
 package karan.view;
 
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -26,6 +27,7 @@ import karan.util.EdunovaException;
  */
 public class ProzorPsi extends javax.swing.JFrame {
 private ObradaPas obrada;
+private ObradaTransakcija obradaTransakcija;
 
   private DecimalFormat df;
     /**
@@ -34,6 +36,7 @@ private ObradaPas obrada;
     public ProzorPsi() {
         initComponents();
         obrada = new ObradaPas();
+        obradaTransakcija=new ObradaTransakcija();
          DecimalFormatSymbols dfs = 
                 new DecimalFormatSymbols(
                         new Locale("hr", "HR"));
@@ -84,6 +87,11 @@ private ObradaPas obrada;
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstTransakcijePasa = new javax.swing.JList<>();
+        txtUvjet = new javax.swing.JTextField();
+        btnTrazi = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstSveTransakcije = new javax.swing.JList<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -190,9 +198,35 @@ private ObradaPas obrada;
         jLabel5.setText("SVI PSI U APLIKACIJI");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
+        lstTransakcijePasa.setForeground(new java.awt.Color(89, 138, 224));
         jScrollPane2.setViewportView(lstTransakcijePasa);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 210, 370));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 440, 140));
+
+        txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUvjetKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtUvjet, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 190, -1));
+
+        btnTrazi.setText("🔍");
+        btnTrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraziActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnTrazi, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 30, -1));
+
+        lstSveTransakcije.setForeground(new java.awt.Color(89, 138, 224));
+        jScrollPane3.setViewportView(lstSveTransakcije);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 430, 100));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("INFORMACIJE O IZABRANOM PSU");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -236,6 +270,24 @@ private ObradaPas obrada;
         napuniView();
     }//GEN-LAST:event_lstPodaciValueChanged
 
+    private void txtUvjetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            ucitajTransakcije();
+        }
+    }//GEN-LAST:event_txtUvjetKeyPressed
+
+    private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
+        ucitajTransakcije();
+    }//GEN-LAST:event_btnTraziActionPerformed
+
+    
+    public void ucitajTransakcije(){
+        DefaultListModel<Transakcija> m=new DefaultListModel<>();
+        m.addAll(obradaTransakcija.read(txtUvjet.getText().trim()));
+        lstSveTransakcije.setModel(m);
+        lstSveTransakcije.repaint();
+        
+    }
     
     public void napuniView(){
         var p = obrada.getEntitet();
@@ -254,6 +306,7 @@ private ObradaPas obrada;
             m.addAll(p.getTransakcije());
         }
         lstTransakcijePasa.setModel(m);
+        lstTransakcijePasa.repaint();
         
     }
     
@@ -273,24 +326,29 @@ private ObradaPas obrada;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnTrazi;
     private javax.swing.JCheckBox chbMjesanac;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCrtica1;
     private javax.swing.JLabel lblCrtica2;
     private javax.swing.JLabel lblCrtica3;
     private javax.swing.JLabel lblCrtica4;
     private javax.swing.JList<Pas> lstPodaci;
+    private javax.swing.JList<Transakcija> lstSveTransakcije;
     private javax.swing.JList<Transakcija> lstTransakcijePasa;
     private javax.swing.JTextField txtDob;
     private javax.swing.JTextField txtIme;
     private javax.swing.JTextField txtKilaza;
     private javax.swing.JTextField txtPol;
+    private javax.swing.JTextField txtUvjet;
     // End of variables declaration//GEN-END:variables
 }

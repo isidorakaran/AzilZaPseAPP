@@ -24,11 +24,9 @@ public class ObradaPas extends Obrada<Pas> {
         return session.createQuery("from Pas", Pas.class).list();
     }
     
-    public List<Transakcija> readTrans() {
-        return session.createQuery("from Transakcija", Transakcija.class).list();
-    }
+   
 
-    public List<Pas> read(VrstaTransakcije vt) {
+   /* public List<Pas> read(VrstaTransakcije vt) {
         List<Pas> p = new ArrayList<>();
         List<Object[]> lista = session.createNativeQuery(
                 " select a.* "
@@ -46,7 +44,7 @@ public class ObradaPas extends Obrada<Pas> {
         }
 
         return p;
-    }
+    }*/
 
     @Override
     protected void kontrolaUnos() throws EdunovaException {

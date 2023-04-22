@@ -86,7 +86,7 @@ public class PocetniInsert {
         for (int i = 0; i < BROJ_TRANSAKCIJA; i++) {
             t = new Transakcija();
             t.setDatum(faker.date().birthday());
-            t.setOpis(faker.book().title());
+            t.setOpis(faker.harryPotter().quote());
             t.setNapomena(faker.lordOfTheRings().character());
             t.setOsoba(osobe.get(sb(0, BROJ_OSOBA - 1)));
             t.setVrstaTransakcije(vrsteTransakcije.get(sb(0, vrsteTransakcije.size() - 1)));

@@ -17,7 +17,19 @@ public class ObradaTransakcija extends Obrada<Transakcija> {
 
     @Override
     public List<Transakcija> read() {
-        return session.createQuery("from Transakcija", Transakcija.class).list();
+        return session.createQuery("from Transakcija order by opis, datum", Transakcija.class).list();
+    }
+     public List<Transakcija> read(String uvjet) {
+        uvjet=uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+       return session.createQuery("from Transakcija "
+               + " where concat(opis,' ',datum) "
+               + " like :uvjet "
+               + " order by opis,datum ", 
+               Transakcija.class)
+               .setParameter("uvjet", uvjet)
+               .setMaxResults(12)
+               .list();
     }
     
      public List<Transakcija> read(VrstaTransakcije vt) {

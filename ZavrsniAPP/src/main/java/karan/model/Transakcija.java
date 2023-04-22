@@ -71,6 +71,6 @@ public class Transakcija extends Entitet {
     @Override
     public String toString() {
     
-return opis;
+return opis + "  " + datum;
 }
 }
