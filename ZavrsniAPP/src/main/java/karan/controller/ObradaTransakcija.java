@@ -46,6 +46,7 @@ public class ObradaTransakcija extends Obrada<Transakcija> {
 
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
+
     }
 
     private void kontrolaOpis() throws EdunovaException {

@@ -6,6 +6,7 @@ package karan;
 
 //import karan.util.HibernateUtil;
 import java.math.BigDecimal;
+import karan.controller.ObradaOperater;
 import karan.controller.ObradaOsoba;
 import karan.controller.ObradaPas;
 import karan.controller.ObradaTransakcija;
@@ -27,8 +28,10 @@ public class Start {
     public static void main(String[] args) {
        // HibernateUtil.getsesSession();
    //new PocetniInsert();
-  new SplashScreen().setVisible(true);
+ new SplashScreen().setVisible(true);
   
+      /*ObradaOperater oo=new ObradaOperater();
+        oo.unosAdminOperater();*/
    
        
      /* ObradaOsoba oo=new ObradaOsoba();

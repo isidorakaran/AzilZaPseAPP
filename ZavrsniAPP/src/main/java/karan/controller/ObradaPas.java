@@ -5,9 +5,12 @@
 package karan.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import karan.model.Pas;
+import karan.model.Transakcija;
+import karan.model.VrstaTransakcije;
 import karan.util.EdunovaException;
 
 /**
@@ -19,6 +22,30 @@ public class ObradaPas extends Obrada<Pas> {
     @Override
     public List<Pas> read() {
         return session.createQuery("from Pas", Pas.class).list();
+    }
+    
+    public List<Transakcija> readTrans() {
+        return session.createQuery("from Transakcija", Transakcija.class).list();
+    }
+
+    public List<Pas> read(VrstaTransakcije vt) {
+        List<Pas> p = new ArrayList<>();
+        List<Object[]> lista = session.createNativeQuery(
+                " select a.* "
+                + " from pas a "
+                + " inner join pas_transakcija b on a.sifra=b.Pas_sifra "
+                + " inner join transakcija c on b.transakcije_sifra=c.sifra "
+                + " inner join vrstatransakcije d on c.vrstaTransakcije_sifra=d.sifra "
+                + " where d.sifra= "+ vt.getSifra() , Object[].class).getResultList();
+        Pas pp;
+        for (Object[] niz : lista) {
+            pp = new Pas();
+            pp.setSifra(Integer.parseInt(niz[0].toString()));
+            pp.setIme(niz[2].toString());
+            p.add(pp);
+        }
+
+        return p;
     }
 
     @Override
@@ -103,33 +130,30 @@ public class ObradaPas extends Obrada<Pas> {
 
     }
 
-    private void kontrolaPol() throws EdunovaException{
+    private void kontrolaPol() throws EdunovaException {
         kontrolaPolNull();
         kontrolaPolBoolean();
     }
 
-    private void kontrolaDobNull() throws EdunovaException{
- if (entitet.getIme() == null) {
+    private void kontrolaDobNull() throws EdunovaException {
+        if (entitet.getIme() == null) {
             throw new EdunovaException("Dob psa mora biti postavljen");
         }
     }
 
-    private void kontrolaPolNull() throws EdunovaException{
-         if (entitet.getIme() == null) {
+    private void kontrolaPolNull() throws EdunovaException {
+        if (entitet.getIme() == null) {
             throw new EdunovaException("Pol psa mora biti postavljen");
         }
     }
 
- 
+    private boolean kontrolaPolBoolean() throws EdunovaException {
 
-    private boolean kontrolaPolBoolean() throws EdunovaException{
-               
-        if (entitet.getPol().equals("Male") || entitet.getPol().equals("Female")){
-           return true;
-        }else{
+        if (entitet.getPol().equals("Male") || entitet.getPol().equals("Female")) {
+            return true;
+        } else {
             throw new EdunovaException("Pol mora biti male ili female");
         }
-        
 
     }
 }

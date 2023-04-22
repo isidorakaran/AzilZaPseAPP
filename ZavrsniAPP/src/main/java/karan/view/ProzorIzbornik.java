@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package karan.view;
+
 import java.io.File;
 import java.awt.Color;
 import java.awt.Image;
@@ -26,52 +27,53 @@ public class ProzorIzbornik extends javax.swing.JFrame {
      * Creates new form ProzorIzbornik
      */
     public ProzorIzbornik() {
-        initComponents();              
+        initComponents();
         setTitle(Aplikacija.NAZIV_APP + ": " + Aplikacija.OPERATER.getImePrezime());
-       // showImages(broj);
+        showImage(broj);
         pokreniSat();
         setIcon();
+
+    }
+
+    //int broj = 0;
+    int broj = 0;
+    public String[] getImages() {
         
-      
+        File file = new File(getClass().getResource("/karan/util/images").getFile());
+
+        String[] imagesList = file.list();
+
+        return imagesList;
     }
-    /*
-    int broj=0;
-    
-     public String[] getImages()
+
+    public void showImage(int index)
     {
+        String[] imagesList = getImages();
 
-     File file = new File(getClass().getResource("/karan/images").getFile());
-     
+        String imageName = imagesList[index];
 
-      return file.list();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/karan/util/images/"+imageName));
 
+        Image image = icon.getImage().getScaledInstance(lblSlike.getWidth(), lblSlike.getHeight(), Image.SCALE_SMOOTH);
+
+        lblSlike.setIcon(new ImageIcon(image));
     }
-    
-    public final void showImages(int index){
-        String[] imageList=getImages();
-        String imageName=imageList[index];
-        ImageIcon icon=new ImageIcon(getClass().getResource("karan/images/"+imageName));
-          Image image = icon.getImage().getScaledInstance(lblSlike.getWidth(), lblSlike.getHeight(), Image.SCALE_SMOOTH);
-          lblSlike.setIcon(new ImageIcon(image));
-    }*/
 
     private void pokreniSat() {
         new Vrijeme().start();
     }
 
-    
-    
-    private class Vrijeme extends Thread{
-        
-        private SimpleDateFormat df=new SimpleDateFormat();
-        
-       public Vrijeme(){
-            df=new SimpleDateFormat("dd.MM.YYY hh:mm:ss");
+    private class Vrijeme extends Thread {
+
+        private SimpleDateFormat df = new SimpleDateFormat();
+
+        public Vrijeme() {
+            df = new SimpleDateFormat("dd.MM.YYY hh:mm:ss");
         }
 
         @Override
         public void run() {
-            while(true){
+            while (true) {
                 lblVrijeme.setText(df.format(new Date()));
                 try {
                     Thread.sleep(1000);
@@ -79,8 +81,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
                 }
             }
         }
-      
-        
+
     }
 
     /**
@@ -136,15 +137,35 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jPanel1.add(lblSlike, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 410, 330));
 
         btnPrvaSlika.setText("Prva slika");
+        btnPrvaSlika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrvaSlikaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnPrvaSlika, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
 
         btnSljedeca.setText("Sljedeća");
-        jPanel1.add(btnSljedeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, -1, -1));
+        btnSljedeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSljedecaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSljedeca, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, -1, -1));
 
         btnPretkodna.setText("Prethodna");
-        jPanel1.add(btnPretkodna, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 510, -1, -1));
+        btnPretkodna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPretkodnaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPretkodna, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, -1, -1));
 
         btnPosljednja.setText("Posljednja slika");
+        btnPosljednja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPosljednjaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnPosljednja, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
 
         jMenuBar1.setBackground(new java.awt.Color(89, 138, 224));
@@ -238,11 +259,11 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-      dispose();
+        dispose();
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       new ProzorOsoba().setVisible(true);
+        new ProzorOsoba().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -262,17 +283,42 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       new ProzorPsi().setVisible(true);
+        new ProzorPsi().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
- private void setIcon() {
-        
-  
-setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.png" )));}
+
+    private void btnPrvaSlikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrvaSlikaActionPerformed
+       broj=0;
+        showImage(broj);
+    }//GEN-LAST:event_btnPrvaSlikaActionPerformed
+
+    private void btnPretkodnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretkodnaActionPerformed
+      broj=broj-1;
+      if(broj<0){
+          broj=0;
+      }
+        showImage(broj);
+    }//GEN-LAST:event_btnPretkodnaActionPerformed
+
+    private void btnSljedecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSljedecaActionPerformed
+        broj=broj+1;
+      if(broj>=getImages().length){
+          broj=getImages().length-1;
+      }
+        showImage(broj);
+    }//GEN-LAST:event_btnSljedecaActionPerformed
+
+    private void btnPosljednjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPosljednjaActionPerformed
+        broj=getImages().length-1;
+        showImage(broj);
+    }//GEN-LAST:event_btnPosljednjaActionPerformed
+    private void setIcon() {
+
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.png")));
+    }
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPosljednja;
