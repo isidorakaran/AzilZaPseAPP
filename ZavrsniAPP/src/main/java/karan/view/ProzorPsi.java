@@ -95,6 +95,10 @@ private ObradaTransakcija obradaTransakcija;
         lstSveTransakcije = new javax.swing.JList<>();
         jLabel6 = new javax.swing.JLabel();
         btnDodajTransakciju = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        btnPromjeni = new javax.swing.JButton();
+        btnObrisi = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -177,7 +181,7 @@ private ObradaTransakcija obradaTransakcija;
                 btnDodajActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDodaj, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 90, 40));
+        jPanel1.add(btnDodaj, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 70, 40));
 
         lstPodaci.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         lstPodaci.setForeground(new java.awt.Color(89, 138, 224));
@@ -202,6 +206,7 @@ private ObradaTransakcija obradaTransakcija;
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         lstTransakcijePasa.setForeground(new java.awt.Color(89, 138, 224));
+        lstTransakcijePasa.setSelectionBackground(new java.awt.Color(251, 225, 183));
         jScrollPane2.setViewportView(lstTransakcijePasa);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 440, 140));
@@ -211,7 +216,7 @@ private ObradaTransakcija obradaTransakcija;
                 txtUvjetKeyPressed(evt);
             }
         });
-        jPanel1.add(txtUvjet, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 190, -1));
+        jPanel1.add(txtUvjet, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 270, -1));
 
         btnTrazi.setText("🔍");
         btnTrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -219,27 +224,67 @@ private ObradaTransakcija obradaTransakcija;
                 btnTraziActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTrazi, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 30, -1));
+        jPanel1.add(btnTrazi, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 30, -1));
 
         lstSveTransakcije.setForeground(new java.awt.Color(89, 138, 224));
+        lstSveTransakcije.setSelectionBackground(new java.awt.Color(251, 225, 183));
         jScrollPane3.setViewportView(lstSveTransakcije);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 430, 100));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, 430, 100));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("INFORMACIJE O IZABRANOM PSU");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
-        btnDodajTransakciju.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDodajTransakciju.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDodajTransakciju.setForeground(new java.awt.Color(89, 138, 224));
-        btnDodajTransakciju.setText("^^");
+        btnDodajTransakciju.setText("Dodaj razmjenu");
         btnDodajTransakciju.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDodajTransakcijuActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDodajTransakciju, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 90, 40));
+        jPanel1.add(btnDodajTransakciju, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 130, 40));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(89, 138, 224));
+        jButton1.setText("Ukloni");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 120, 40));
+
+        btnPromjeni.setText("PROMJENI");
+        btnPromjeni.setBackground(new java.awt.Color(89, 138, 224));
+        btnPromjeni.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnPromjeni.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnPromjeni.setForeground(new java.awt.Color(255, 255, 255));
+        btnPromjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPromjeni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 80, 40));
+
+        btnObrisi.setBackground(new java.awt.Color(89, 138, 224));
+        btnObrisi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnObrisi.setForeground(new java.awt.Color(255, 255, 255));
+        btnObrisi.setText("OBRIŠI");
+        btnObrisi.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnObrisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 70, 40));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Pretraži razmjenu po datumu ili opisu");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -324,11 +369,52 @@ private ObradaTransakcija obradaTransakcija;
             }
         }
         lstTransakcijePasa.repaint();
+        dodajTransakcije();
         
         
         
         
     }//GEN-LAST:event_btnDodajTransakcijuActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         if(lstTransakcijePasa.getSelectedValuesList()==null || lstTransakcijePasa.getSelectedValuesList().isEmpty()){
+            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite transakciju");
+            return;
+        }
+         DefaultListModel<Transakcija> m=(DefaultListModel<Transakcija>)lstTransakcijePasa.getModel();
+         for(Transakcija t:lstTransakcijePasa.getSelectedValuesList()){
+             m.removeElement(t);
+         }
+         lstTransakcijePasa.repaint();
+         obrisiTransakcije();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnPromjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            return;
+        }
+        obrada.getEntitet().getTransakcije().clear();
+        napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromjeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            return;
+        }
+        obrada.getEntitet().getTransakcije().clear();
+        try {
+            obrada.delete();
+            ucitaj();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
 
     
     public void ucitajTransakcije(){
@@ -360,6 +446,32 @@ private ObradaTransakcija obradaTransakcija;
         
     }
     
+    private void dodajTransakcije(){
+        if(lstPodaci.getSelectedValue()==null){
+            return;
+        }
+        obrada.getEntitet().getTransakcije().clear();
+        napuniModel();
+        try {
+            obrada.update();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }
+    
+    private void obrisiTransakcije(){
+         if(lstPodaci.getSelectedValue()==null){
+            return;
+        }
+        obrada.getEntitet().getTransakcije().clear();
+        napuniModel();
+        try {
+            obrada.delete();
+        } catch (EdunovaException ex) {
+            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+        }
+    }
+    
     
     public void napuniModel(){
          var p = obrada.getEntitet();
@@ -389,14 +501,18 @@ private ObradaTransakcija obradaTransakcija;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnDodajTransakciju;
+    private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPromjeni;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JCheckBox chbMjesanac;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

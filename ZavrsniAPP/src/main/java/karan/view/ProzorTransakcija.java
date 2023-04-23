@@ -324,21 +324,29 @@ public class ProzorTransakcija extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPromjeniActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-        if(lstPodaci.getSelectedValue()==null){
-            JOptionPane.showMessageDialog(getRootPane(), "Prvo odaberite razmjenu.");
+       if(lstPodaci.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(
+                    getRootPane(), 
+                    "Prvo odaberite razmjenu");
             return;
         }
-        if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati razmjenu: " + obrada.getEntitet().getOpis()+"?",
-                "Brisanje ",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+        
+        if(JOptionPane.showConfirmDialog(
+                getRootPane(),
+                "Sigurno obrisati " + obrada.getEntitet().getOpis() + "?",
+                "Brisanje",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
             return;
         }
         
         try {
             obrada.delete();
             ucitaj();
-            
         } catch (EdunovaException ex) {
-            JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
+            JOptionPane.showMessageDialog(
+                    getRootPane(),
+                    ex.getPoruka());
         }
         
     }//GEN-LAST:event_btnObrisiActionPerformed
