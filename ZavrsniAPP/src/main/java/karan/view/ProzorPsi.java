@@ -99,6 +99,7 @@ private ObradaTransakcija obradaTransakcija;
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -206,7 +207,8 @@ private ObradaTransakcija obradaTransakcija;
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         lstTransakcijePasa.setForeground(new java.awt.Color(89, 138, 224));
-        lstTransakcijePasa.setSelectionBackground(new java.awt.Color(251, 225, 183));
+        lstTransakcijePasa.setSelectionBackground(new java.awt.Color(89, 138, 224));
+        lstTransakcijePasa.setSelectionForeground(new java.awt.Color(251, 225, 183));
         jScrollPane2.setViewportView(lstTransakcijePasa);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 440, 140));
@@ -218,16 +220,19 @@ private ObradaTransakcija obradaTransakcija;
         });
         jPanel1.add(txtUvjet, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 270, -1));
 
-        btnTrazi.setText("🔍");
+        btnTrazi.setBackground(new java.awt.Color(89, 138, 224));
+        btnTrazi.setForeground(new java.awt.Color(255, 255, 255));
+        btnTrazi.setText("Traži ");
         btnTrazi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTraziActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTrazi, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 30, -1));
+        jPanel1.add(btnTrazi, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 70, -1));
 
         lstSveTransakcije.setForeground(new java.awt.Color(89, 138, 224));
-        lstSveTransakcije.setSelectionBackground(new java.awt.Color(251, 225, 183));
+        lstSveTransakcije.setSelectionBackground(new java.awt.Color(89, 138, 224));
+        lstSveTransakcije.setSelectionForeground(new java.awt.Color(251, 225, 183));
         jScrollPane3.setViewportView(lstSveTransakcije);
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, 430, 100));
@@ -239,23 +244,23 @@ private ObradaTransakcija obradaTransakcija;
 
         btnDodajTransakciju.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDodajTransakciju.setForeground(new java.awt.Color(89, 138, 224));
-        btnDodajTransakciju.setText("Dodaj razmjenu");
+        btnDodajTransakciju.setIcon(new javax.swing.ImageIcon(getClass().getResource("/up-chevron.png"))); // NOI18N
         btnDodajTransakciju.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDodajTransakcijuActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDodajTransakciju, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 130, 40));
+        jPanel1.add(btnDodajTransakciju, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 50, 40));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(89, 138, 224));
-        jButton1.setText("Ukloni");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/down-chevron.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 120, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, 50, 40));
 
         btnPromjeni.setText("PROMJENI");
         btnPromjeni.setBackground(new java.awt.Color(89, 138, 224));
@@ -285,6 +290,18 @@ private ObradaTransakcija obradaTransakcija;
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Pretraži razmjenu po datumu ili opisu");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, -1));
+
+        jButton2.setBackground(new java.awt.Color(89, 138, 224));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Nova razmjena");
+        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 510, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -407,6 +424,10 @@ private ObradaTransakcija obradaTransakcija;
         if(lstPodaci.getSelectedValue()==null){
             return;
         }
+        if(JOptionPane.showConfirmDialog(getRootPane(), "Sigurno obrisati " + obrada.getEntitet().getIme() +"?",
+                "Brisanje ",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+            return;
+        }
         obrada.getEntitet().getTransakcije().clear();
         try {
             obrada.delete();
@@ -415,6 +436,10 @@ private ObradaTransakcija obradaTransakcija;
             JOptionPane.showMessageDialog(getParent(), ex.getPoruka());
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new ProzorTransakcija().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     
     public void ucitajTransakcije(){
@@ -506,6 +531,7 @@ private ObradaTransakcija obradaTransakcija;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JCheckBox chbMjesanac;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

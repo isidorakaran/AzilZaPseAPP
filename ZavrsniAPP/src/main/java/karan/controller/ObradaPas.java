@@ -50,15 +50,19 @@ public class ObradaPas extends Obrada<Pas> {
     @Override
     protected void kontrolaUnos() throws EdunovaException {
         //kontrolaMjesavina();
-        kontrolaPol();
-        //kontrolaIme();
-        //kontrolaDob();
-        //kontrolaKilaza();
+      
+        kontrolaIme();
+          kontrolaPol();
+        kontrolaDob();
+        kontrolaKilaza();
     }
 
     @Override
     protected void kontrolaPromjena() throws EdunovaException {
         kontrolaIme();
+        kontrolaPol();
+        kontrolaDob();
+        kontrolaKilaza();
     }
 
     @Override
@@ -67,9 +71,15 @@ public class ObradaPas extends Obrada<Pas> {
 
     private void kontrolaIme() throws EdunovaException {
         kontrolaImeNull();
+        kontrolaImeObavezno();
         kontrolaImeNijeBroj();
         kontrolaImeNijeZnak();
         kontrolaImeMinIMaxDuzina();
+    }
+    private void kontrolaImeObavezno()throws EdunovaException{
+         if(entitet.getIme().trim().isEmpty()){
+            throw new EdunovaException("Obavezno unesite ime psa!");
+        }
     }
 
     private void kontrolaImeNijeBroj() throws EdunovaException {
@@ -124,7 +134,7 @@ public class ObradaPas extends Obrada<Pas> {
 
     private void kontrolaDobNijeZnak() throws EdunovaException {
         if (!(Pattern.matches("^[\\p{L} 0-9.'-]+$", entitet.getDob()))) {
-            throw new EdunovaException("DOb ne smije biti znak");
+            throw new EdunovaException("Obavezno unesite dob i dob ne smije biti znak");
         }
 
     }
@@ -145,13 +155,20 @@ public class ObradaPas extends Obrada<Pas> {
             throw new EdunovaException("Pol psa mora biti postavljen");
         }
     }
+    
+    private void kontrolaDobObavezan()throws EdunovaException{
+        if(entitet.getDob().trim().isEmpty()){
+            throw new EdunovaException("Obavezno unesite dob psa!");
+        }
+    }
+    
 
     private boolean kontrolaPolBoolean() throws EdunovaException {
 
-        if (entitet.getPol().equals("Male") || entitet.getPol().equals("Female")) {
+        if (entitet.getPol().equals("M") || entitet.getPol().equals("Ž")) {
             return true;
         } else {
-            throw new EdunovaException("Pol mora biti male ili female");
+            throw new EdunovaException("Pol mora biti M ili Ž");
         }
 
     }

@@ -25,40 +25,37 @@ public class ObradaOsoba extends Obrada<Osoba> {
     @Override
     protected void kontrolaUnos() throws EdunovaException {
         kontrolaIme();
-         kontrolaPrezime();
-          kontrolaEmail();
+        kontrolaPrezime();
+        kontrolaEmail();
         kontrolaBrojTelefona();
-       
-        
-       
 
     }
 
     @Override
     protected void kontrolaPromjena() throws EdunovaException {
-        kontrolaBrojTelefona();
-        kontrolaEmail();
         kontrolaIme();
         kontrolaPrezime();
+        kontrolaEmail();
+        kontrolaBrojTelefona();
 
     }
 
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
-        if(entitet.getTransakcije()!=null && !entitet.getTransakcije().isEmpty()){
-            
-            StringBuilder sb=new StringBuilder();
+        if (entitet.getTransakcije() != null && !entitet.getTransakcije().isEmpty()) {
+
+            StringBuilder sb = new StringBuilder();
             sb.append("Osoba ");
             sb.append(entitet.getIme());
             sb.append(" se ne može obrisati jer pripada razmjeni: ");
             sb.append("\n");
-            int b=0;
-            for(Transakcija t:entitet.getTransakcije()){
+            int b = 0;
+            for (Transakcija t : entitet.getTransakcije()) {
                 sb.append(++b);
                 sb.append(". ");
                 sb.append(t.getOpis());
                 sb.append("\n");
-                
+
             }
             throw new EdunovaException(sb.toString());
         }
@@ -66,16 +63,23 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
     private void kontrolaIme() throws EdunovaException {
         kontrolaImeNull();
+        kontrolaImeObavezno();
+        KontrolaImeMinIMaxDuzina();
         kontrolaImeNijeZnak();
         kontrolaImeNijeBroj();
-        KontrolaImeMinIMaxDuzina();
+        
     }
-     private void kontrolaImeNull() throws EdunovaException {
+    private void kontrolaImeObavezno() throws EdunovaException{
+        if(entitet.getIme().trim().isEmpty()){
+            throw new EdunovaException("Obavezno unesite ime!");
+        }
+    }
+
+    private void kontrolaImeNull() throws EdunovaException {
         if (entitet.getIme() == null) {
             throw new EdunovaException("Ime mora biti postavljeno");
         }
     }
-
 
     private void kontrolaImeNijeZnak() throws EdunovaException {
         for (int i = 0; i < entitet.getIme().length(); i++) {
@@ -89,12 +93,11 @@ public class ObradaOsoba extends Obrada<Osoba> {
     }
 
     private void KontrolaImeMinIMaxDuzina() throws EdunovaException {
-        if (entitet.getIme().trim().length() < 3 || entitet.getIme().trim().length() > 50) {
+        if (entitet.getIme().trim().length() < 2 || entitet.getIme().trim().length() > 50) {
             throw new EdunovaException("Ime osobe ne smije imati manje od 2 i više od 50 znakova");
         }
     }
 
-   
     private void kontrolaImeNijeBroj() throws EdunovaException {
         boolean broj = false;
         try {
@@ -109,9 +112,16 @@ public class ObradaOsoba extends Obrada<Osoba> {
 
     private void kontrolaPrezime() throws EdunovaException {
         kontrolaPrezimeNull();
+        kontrolaPrezimeObavezno();
         kontrolaPrezimeNijeZnak();
         kontrolaPrezimeNijeBroj();
         KontrolaPrezimeMinIMaxDuzina();
+    }
+    
+      private void kontrolaPrezimeObavezno() throws EdunovaException{
+        if(entitet.getPrezime().trim().isEmpty()){
+            throw new EdunovaException("Obavezno unesite prezime!");
+        }
     }
 
     private void kontrolaPrezimeNull() throws EdunovaException {

@@ -6,6 +6,7 @@ package karan.controller;
 
 import java.util.List;
 import karan.model.VrstaTransakcije;
+import karan.util.Alati;
 import karan.util.EdunovaException;
 
 /**
@@ -26,7 +27,7 @@ public class ObradaVrstaTransakcije extends Obrada<VrstaTransakcije>{
 
     @Override
     protected void kontrolaPromjena() throws EdunovaException {
-       // kontrolaNaziv();
+       
     }
 
     @Override
@@ -34,10 +35,16 @@ public class ObradaVrstaTransakcije extends Obrada<VrstaTransakcije>{
     }
 
     private void kontrolaNaziv() throws EdunovaException {
-         kontrolaNazivNull();
-        kontrolaNazivNijeBroj();
-       // kontrolaNazivNijeZnak();
-        //KontrolaNazivMinIMaxDuzina();
+       kontrolaNazivNull();
+       kontrolaNazivObavezan();
+       kontrolaNazivNijeBroj();
+    }
+    
+    private void kontrolaNazivObavezan() throws EdunovaException{
+        if(entitet.getNaziv().trim().isEmpty()){
+            throw new EdunovaException("Obavezno unesite vrstu razmjene!");
+        }
+    
     }
 
     private void kontrolaNazivNijeBroj() throws EdunovaException{
@@ -48,7 +55,7 @@ public class ObradaVrstaTransakcije extends Obrada<VrstaTransakcije>{
         } catch (Exception e) {
         }
         if (broj) {
-            throw new EdunovaException("Ne smijete unositi znakove niti brojeve");
+            throw new EdunovaException("Ne smijete unositi brojeve");
         }
     }
 
@@ -58,21 +65,8 @@ public class ObradaVrstaTransakcije extends Obrada<VrstaTransakcije>{
         }
     }
 
-    private void kontrolaNazivNijeZnak() throws EdunovaException{
-         for (int i = 0; i < entitet.getNaziv().length(); i++) {
-            if (Character.isLetter(entitet.getNaziv().charAt(i))) {
-                continue;
-            } else {
-                throw new EdunovaException("Ne smijete unositi znakove niti brojeve");
-            }
-        }
-    }
 
-    private void KontrolaNazivMinIMaxDuzina() throws EdunovaException{
-                if (entitet.getNaziv().trim().length() < 2 || entitet.getNaziv().trim().length() > 4) {
-            throw new EdunovaException("Naziv mora sadržavati najmanje 2 slova i najviše tri(in ili out)");
-        }
-    }
+   
     
     
     

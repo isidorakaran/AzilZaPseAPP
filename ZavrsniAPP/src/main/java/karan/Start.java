@@ -27,7 +27,7 @@ public class Start {
 
     public static void main(String[] args) {
        // HibernateUtil.getsesSession();
-   //new PocetniInsert();
+ //  new PocetniInsert();
  new SplashScreen().setVisible(true);
   
   /*    ObradaOperater oo=new ObradaOperater();

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
+import karan.model.Operater;
 import karan.model.Osoba;
 import karan.model.Pas;
 import karan.model.Transakcija;
@@ -18,6 +19,7 @@ import org.checkerframework.checker.units.qual.s;
 import org.hibernate.Session;
 import org.hibernate.grammars.importsql.SqlScriptLexer;
 import org.hibernate.grammars.importsql.SqlScriptParser;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -30,6 +32,7 @@ public class PocetniInsert {
     private static int BROJ_TRANSAKCIJA = 50;
 
     private Faker faker;
+     private List<Operater> operateri;
     private List<Osoba> osobe;
     private List<Pas> psi;
     private List<Transakcija> transakcije;
@@ -38,18 +41,33 @@ public class PocetniInsert {
 
     public PocetniInsert() {
         faker = new Faker();
+        operateri=new ArrayList<>();
         osobe = new ArrayList<>();
         psi = new ArrayList<>();
         transakcije = new ArrayList<>();
         vrsteTransakcije = new ArrayList<>();
         session = HibernateUtil.getSession();
         session.beginTransaction();
+        kreirajOperatere();
         kreirajOsobe();
         kreirajVrsteTransakcije();
         kreirajTransakcije();
         kreirajPse();
 
         session.getTransaction().commit();
+    }
+    
+    private void kreirajOperatere() {
+        Operater o=new Operater();
+        o.setIme("Isidora");
+        o.setPrezime("Karan");
+        o.setEmail("karanisidora@gmail.com");
+        o.setOib("09403302317");
+        o.setLozinka(BCrypt.hashpw("1111", BCrypt.gensalt()).toCharArray());
+        session.persist(o);
+      
+        operateri.add(o);  
+   
     }
 
     private void kreirajOsobe() {
@@ -85,7 +103,7 @@ public class PocetniInsert {
         Transakcija t;
         for (int i = 0; i < BROJ_TRANSAKCIJA; i++) {
             t = new Transakcija();
-            t.setDatum(faker.date().birthday());
+            t.setDatum(faker.date().birthday(1, 10));
             t.setOpis(faker.harryPotter().quote());
             t.setNapomena(faker.lordOfTheRings().character());
             t.setOsoba(osobe.get(sb(0, BROJ_OSOBA - 1)));
@@ -102,10 +120,10 @@ public class PocetniInsert {
         for (int i = 0; i < BROJ_PASA; i++) {
             p = new Pas();
             p.setIme(faker.dog().name());
-            p.setDob(faker.number().numberBetween(1, 11) + " " + faker.demographic().sex().replaceAll("Male", "Month").replaceAll("Female", "Year"));
+            p.setDob(faker.number().numberBetween(1, 11) + " " + faker.demographic().sex().replaceAll("Male", "M").replaceAll("Female", "G"));
             p.setKilaza(new BigDecimal(faker.number().numberBetween(0, 30)));
             p.setMjesavina(faker.bool().bool());
-            p.setPol(faker.dog().gender());
+            p.setPol(faker.demographic().sex().replaceAll("Male", "M").replaceAll("Female", "Ž"));
             t = new ArrayList<>();
             for (int j = 0; j < sb(1, 2); j++) {
                 t.add(transakcije.get(sb(0, BROJ_TRANSAKCIJA - 1)));
