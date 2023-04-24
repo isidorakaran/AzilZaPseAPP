@@ -285,7 +285,11 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(getRootPane(), "Dobrodošli u aplikaciju Azil za pse!\n" + "\n"
+        +"Ovdje ćete pronaći sve podatke o osobama koje su učestvovale u razmjenama, \n" + "\n"
+                + "sve informacije o psima, sve razmjene uz mogućnost kreiranja nove vrste razmjene.\n"
+        +"\n" + "Aplikacija omogućava i unos, brisanje i promjenu postojećih podataka.");
+           
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed

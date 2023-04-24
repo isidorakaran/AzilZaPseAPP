@@ -4,15 +4,28 @@
  */
 package karan.view;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import karan.controller.ObradaOsoba;
 import karan.model.Osoba;
 import karan.model.Transakcija;
 import karan.util.Aplikacija;
 import karan.util.EdunovaException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -66,13 +79,14 @@ public class ProzorOsoba extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtBrTelefona = new javax.swing.JTextField();
         btnDodaj = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btnPromjeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstTransakcije = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
+        btnExcel = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -179,10 +193,6 @@ public class ProzorOsoba extends javax.swing.JFrame {
         });
         jPanel1.add(btnDodaj, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, 90, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/White_paw_print.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 500, 450));
-
         btnPromjeni.setBackground(new java.awt.Color(89, 138, 224));
         btnPromjeni.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnPromjeni.setForeground(new java.awt.Color(255, 255, 255));
@@ -225,6 +235,20 @@ public class ProzorOsoba extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("RAZMJENE U KOJIMA SU UČESTVOVALE OSOBE");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, -1, -1));
+
+        btnExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnExcel.setForeground(new java.awt.Color(89, 138, 224));
+        btnExcel.setText("Export u Excel");
+        btnExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, 130, 70));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/White_paw_print.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 500, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -310,6 +334,112 @@ public class ProzorOsoba extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrezimeActionPerformed
 
+    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        jfc.setCurrentDirectory(new File(System.getProperty("user.home")));
+        jfc.setSelectedFile(new File(System.getProperty("user.home")
+            + File.separator + "osobe.xlsx"));
+    if (jfc.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
+        return;
+        }
+
+        try {
+
+            Workbook workbook = new XSSFWorkbook(); // new HSSFWorkbook() for generating `.xls` file
+
+            /* CreationHelper helps us create instances of various things like DataFormat,
+            Hyperlink, RichTextString etc, in a format (HSSF, XSSF) independent way */
+            CreationHelper createHelper = workbook.getCreationHelper();
+
+            // Create a Sheet
+            Sheet sheet = workbook.createSheet("Popis osoba");
+
+            // Create a Font for styling header cells
+            Font headerFont = workbook.createFont();
+            headerFont.setBold(true);
+            headerFont.setFontHeightInPoints((short) 14);
+            headerFont.setColor(IndexedColors.RED.getIndex());
+
+            // Create a CellStyle with the font
+            CellStyle headerCellStyle = workbook.createCellStyle();
+            headerCellStyle.setFont(headerFont);
+
+            // Create a Row
+            Row headerRow = sheet.createRow(0);
+
+            // Create cells
+            Cell cell = headerRow.createCell(0);
+            cell.setCellValue("Ime");
+            cell.setCellStyle(headerCellStyle);
+
+            cell = headerRow.createCell(1);
+            cell.setCellValue("Prezime");
+            cell.setCellStyle(headerCellStyle);
+            
+            
+            cell = headerRow.createCell(2);
+            cell.setCellValue("E-mail");
+            cell.setCellStyle(headerCellStyle);
+            
+            cell = headerRow.createCell(3);
+            cell.setCellValue("Broj telefona");
+            cell.setCellStyle(headerCellStyle);
+            
+               
+            // Create Other rows and cells with employees data
+            int rowNum = 1;
+            Row row;
+            for(Osoba o : obrada.read()){
+              
+
+                    row = sheet.createRow(rowNum++);
+
+                    row.createCell(0)
+                    .setCellValue(o.getIme());
+
+                    row.createCell(1)
+                    .setCellValue(o.getPrezime());
+
+                    row.createCell(2)
+                    .setCellValue(o.getEmail());
+                    
+                    row.createCell(3)
+                    .setCellValue(o.getBrojTelefona());
+                  
+                    
+            }
+
+            row = sheet.createRow(rowNum);
+            cell = row.createCell(4);
+            CellStyle style = workbook.createCellStyle();
+            DataFormat format = workbook.createDataFormat();
+            style.setDataFormat(format.getFormat("0.00"));
+            cell.setCellStyle(style);
+//                      cell.setCellFormula("sum(A2:A" + (rowNum) + ")");
+
+            // Resize all columns to fit the content size
+            for (int i = 0; i < 4; i++) {
+                sheet.autoSizeColumn(i);
+            }
+
+            // Write the output to a file
+            FileOutputStream fileOut = new FileOutputStream(jfc.getSelectedFile());
+            workbook.write(fileOut);
+            fileOut.close();
+
+            // Closing the workbook
+            workbook.close();
+
+            ProcessBuilder builder = new ProcessBuilder(
+                "cmd.exe", "/c", jfc.getSelectedFile().getAbsolutePath());
+            builder.redirectErrorStream(true);
+            Process p = builder.start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }        
+    }//GEN-LAST:event_btnExcelActionPerformed
+
     private void napuniView() {
         var o = obrada.getEntitet();
 
@@ -345,6 +475,7 @@ public class ProzorOsoba extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnExcel;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromjeni;
     private javax.swing.JLabel jLabel1;
