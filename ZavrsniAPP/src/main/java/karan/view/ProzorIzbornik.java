@@ -94,7 +94,6 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         lblVrijeme = new javax.swing.JLabel();
         lblSlike = new javax.swing.JLabel();
@@ -104,6 +103,8 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         btnPosljednja = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -112,8 +113,6 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -122,9 +121,6 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(760, 600));
         jPanel1.setPreferredSize(new java.awt.Dimension(760, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/White_paw_print.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 310, 420));
 
         jToolBar1.setBackground(new java.awt.Color(89, 138, 224));
         jToolBar1.setBorder(null);
@@ -178,6 +174,24 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/okvir4.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-160, 20, 680, 530));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(89, 138, 224));
+        jLabel4.setText("GIT");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jLabel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel4KeyPressed(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/White_paw_print.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 310, 420));
+
         jMenuBar1.setBackground(new java.awt.Color(89, 138, 224));
         jMenuBar1.setBorder(null);
         jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -230,17 +244,6 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem5);
 
-        jMenuItem6.setText("Radno vrijeme");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem6);
-
-        jMenuItem7.setText("Kontakt informacije");
-        jMenu4.add(jMenuItem7);
-
         jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Izlaz");
@@ -292,10 +295,6 @@ public class ProzorIzbornik extends javax.swing.JFrame {
            
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         new ProzorPsi().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -325,6 +324,21 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         broj=getImages().length-1;
         showImage(broj);
     }//GEN-LAST:event_btnPosljednjaActionPerformed
+
+    private void jLabel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel4KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4KeyPressed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        try {
+            ProcessBuilder builder = new ProcessBuilder(
+                    "cmd.exe", "/c", "explorer https://github.com/isidorakaran");
+            builder.redirectErrorStream(true);
+            Process p = builder.start();
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_jLabel4MouseClicked
     private void setIcon() {
 
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.png")));
@@ -342,6 +356,7 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
@@ -351,8 +366,6 @@ public class ProzorIzbornik extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblSlike;
