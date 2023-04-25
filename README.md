@@ -1,7 +1,5 @@
 # AzilZaPseAPP
 
-Uvod
-
 Zadatak završnog rada bio je napraviti aplikaciju koja omogućava čitanje i unos podataka, te promjenu i brisanje postojećih. Tema Azil za pse odabrana je zbog izrazite želje za otvaranjem azila u Vukovaru i zbog velike ljubavi prema životinjama. 
 Cilj aplikacije jeste olakšati rad u azilu koji  neprestano prima nove pse i održava najbolji omjer udomljenih pasa. U radu  će biti opisan svaki dio aplikacije uz opis što svaki prozor u aplikaciji znači , što predstavlja te koje mogućnosti daje. Podatke u aplikaciji može čitati, unositi, mjenjati i brisati isključivo jedan operater, odnosno zaposlenik u azilu koji pomoću autorizacije pristupa aplikaciji. Pomoću nje operater ima mogućnost i čitanja podataka u Excel-u gdje jednim klikom prenosi podatke iz aplikacije i sprema ih u Excel dokument radi lakšeg pregleda.
 Tijekom rada na aplikaciji najveći izazov bio je shvaćanje povezivanja aplikacije s bazom podataka. Najviše vremena izdvojenog na izradu aplikacije iskoristila sam na dizajn i detalje. Najzanimljiviji dio izrade bio je rad na kontrolama. Pomoću kontrola operateru sam ograničila nepotrebne unose brojeva, znakova ili slova, kao i izradu kontrole koja je formatirala e-mail i broj telefona. U nastavku završnog rada slijedi slika ER-dijagrama i detaljan opis aplikacije. 
