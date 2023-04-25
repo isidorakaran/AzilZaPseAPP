@@ -85,6 +85,7 @@ public class ProzorLogin extends javax.swing.JFrame {
         jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(760, 600));
 
         jPanel2.setBackground(new java.awt.Color(89, 138, 224));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
